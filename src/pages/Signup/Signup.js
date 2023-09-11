@@ -38,7 +38,8 @@ const Signup = () => {
     const { name, value } = event.target;
     setPhoneNumber({ ...phoneNumber, [name]: value });
   };
-  console.log(phoneNumber);
+  const addPhoneNumber =
+    phoneNumber.firstPhoneNumber + phoneNumber.lastPhoneNumber;
 
   const handleSignUp = () => {
     fetch('http://localhost:8000/signup', {
@@ -50,7 +51,7 @@ const Signup = () => {
         email: email,
         password: password,
         nickname: nickname,
-        phoneNumber: '',
+        phoneNumber: addPhoneNumber,
         birthday: 'YYYY-MM-DD',
         profileImage: '',
       }),
