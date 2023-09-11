@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.scss';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button/Button2';
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
