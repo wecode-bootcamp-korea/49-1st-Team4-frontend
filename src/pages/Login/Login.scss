@@ -1,0 +1,145 @@
+@import '../../styles/mixin.scss';
+
+.login {
+  @include flexCenter;
+  width: 100%;
+  height: 100vh;
+
+  .loginBody {
+    @include flexDirectionColumn;
+    align-items: center;
+    gap: 24px;
+    width: 576px;
+    height: 844px;
+    border: 1px solid $Grey60;
+    border-radius: 16px;
+
+    .splash {
+      @include flexCenter;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      height: 555px;
+
+      .imgLogo {
+        width: 118px;
+        height: 142.997px;
+      }
+
+      .imgWecode {
+        width: 144px;
+        height: 32px;
+      }
+    }
+
+    .container {
+      @include flexDirectionColumn;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      height: 225px;
+      padding: 0px 24px;
+
+      .inputForm {
+        width: 100%;
+
+        .inputBox {
+          @include flexDirectionColumn;
+          align-items: center;
+          gap: 8px;
+          width: 100%;
+          height: 120px;
+
+          .email {
+            align-self: stretch;
+            height: 56px;
+            padding: 19px 0 15px 16px;
+            border: 1px solid $Grey88;
+            border-radius: 6px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            background-color: $White;
+
+            &:focus {
+              border: 2px solid $Black;
+            }
+          }
+
+          .password {
+            align-self: stretch;
+            padding: 19px 0 15px 16px;
+            height: 56px;
+            border: 1px solid $Grey88;
+            border-radius: 6px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            background-color: $White;
+
+            &:focus {
+              border: 2px solid $Black;
+            }
+          }
+        }
+
+        .loginBtn {
+          width: 100%;
+          height: 56px;
+          margin-top: 16px;
+          border: 0;
+          outline: 0;
+          border-radius: 6px;
+          font-weight: 800;
+          font-size: 18px;
+          line-height: normal;
+          background: $Blue;
+          color: $White;
+          cursor: pointer;
+
+          &:hover {
+            background: $Navy;
+          }
+
+          &:disabled {
+            background: $Grey80;
+            cursor: default;
+          }
+        }
+      }
+
+      .loginOption {
+        @include flexCenter;
+        gap: 24px;
+        width: 240px;
+        height: 17px;
+
+        .joinBtn {
+          width: 96px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: normal;
+          color: $Black;
+          text-align: center;
+          text-decoration-line: none;
+        }
+
+        .divideDiv {
+          width: 1px;
+          height: 16px;
+          background-color: $Grey88;
+        }
+
+        .passwordFind {
+          width: 96px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: normal;
+          color: $Black;
+          text-align: center;
+          text-decoration-line: none;
+        }
+      }
+    }
+  }
+}

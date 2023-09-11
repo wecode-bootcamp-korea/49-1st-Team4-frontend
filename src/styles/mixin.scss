@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import './variable.scss';
 
 @mixin flexCenter {
   display: flex;
@@ -13,9 +13,9 @@
 
 @mixin fillInput {
   height: 56px;
+  padding-left: 16px;
   border: 1px solid $Grey88;
   border-radius: 8px;
-  padding-left: 16px;
   font-size: 16px;
 
   &:focus {
