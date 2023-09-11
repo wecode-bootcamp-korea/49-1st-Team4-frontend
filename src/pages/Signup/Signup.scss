@@ -59,20 +59,12 @@
         }
       }
 
-      .essentialInfo input {
-        @include fillInput;
-      }
-
       .nicknameInfo {
         @include flexDirectionColumn;
         gap: 8px;
 
         .nicknameInfoHeader {
           @include spaceBetween;
-        }
-
-        #nickname {
-          @include fillInput;
         }
       }
 
@@ -103,14 +95,14 @@
           display: flex;
           gap: 8px;
 
-          .phoneNumberFirst {
+          .firstPhoneNumber {
             @include fillInput;
-            min-width: 136px;
+            width: 136px;
             font-size: 16px;
             color: $Grey60;
           }
 
-          .phoneNumberLast {
+          .lastPhoneNumber {
             @include fillInput;
             width: 384px;
           }

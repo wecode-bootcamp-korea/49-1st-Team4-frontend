@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../../components/Input/Input';
 import './Login.scss';
 import Button from '../../components/Button';
 
@@ -51,15 +52,15 @@ const Login = () => {
         <div className="container">
           <form className="inputForm">
             <div className="inputBox">
-              <input
-                className="email"
+              <Input
                 name="email"
-                type="text"
+                type="email"
                 placeholder="이메일"
                 onChange={handleUserInfo}
+                babo="a"
               />
-              <input
-                className="password"
+
+              <Input
                 name="password"
                 type="password"
                 placeholder="비밀번호"

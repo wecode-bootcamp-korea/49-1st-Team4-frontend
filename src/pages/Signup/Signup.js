@@ -2,15 +2,17 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Signup.scss';
 import Button from '../../components/Button';
+import Input from '../../components/Input/Input';
 
 const Signup = () => {
-  const [loginInfo, setLoginInfo] = useState({
+  const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
     password2: '',
+    nickname: '',
   });
 
-  const { email, password, password2, nickname } = loginInfo;
+  const { email, password, password2, nickname } = signUpInfo;
   const isCheckValidation =
     email.includes('@') &&
     email.includes('.') &&
@@ -18,10 +20,26 @@ const Signup = () => {
     password === password2 &&
     nickname;
 
-  const handleEmail = event => {
+  const handleUserInfo = event => {
     const { name, value } = event.target;
-    setLoginInfo({ ...loginInfo, [name]: value });
+    setSignUpInfo({ ...signUpInfo, [name]: value });
   };
+  console.log(email, password, password2);
+
+  const [phoneNumber, setPhoneNumber] = useState({
+    firstPhoneNumber: '',
+    lastPhoneNumber: '',
+  });
+
+  const handleFirstPhoneNumber = event => {
+    const { name, value } = event.target;
+    setPhoneNumber({ ...phoneNumber, [name]: value });
+  };
+  const handleLastPhoneNumber = event => {
+    const { name, value } = event.target;
+    setPhoneNumber({ ...phoneNumber, [name]: value });
+  };
+  console.log(phoneNumber);
 
   const handleSignUp = () => {
     fetch('http://localhost:8000/signup', {
@@ -49,7 +67,7 @@ const Signup = () => {
           <BackButton />
         </div>
 
-        <form className="signUpForm" onChange={handleEmail}>
+        <form className="signUpForm">
           <div className="formHeader">회원가입</div>
 
           <div className="essentialInfo">
@@ -57,21 +75,37 @@ const Signup = () => {
               <span>기본 정보</span>
               <span className="spanRed">필수 사항</span>
             </div>
-            <input name="email" type="email" placeholder="이메일" />
-            <input name="password" type="password" placeholder="비밀번호" />
-            <input
+
+            <Input
+              name="email"
+              type="email"
+              placeholder="이메일"
+              onChange={handleUserInfo}
+            />
+            <Input
+              name="password"
+              type="password"
+              placeholder="비밀번호"
+              onChange={handleUserInfo}
+            />
+            <Input
               name="password2"
               type="password"
               placeholder="비밀번호 확인"
+              onChange={handleUserInfo}
             />
           </div>
 
           <div className="nicknameInfo">
             <div className="nicknameInfoHeader">
               <span>닉네임</span>
-              <span className="spanGrey">선택 사항</span>
+              <span className="spanRed">필수 사항</span>
             </div>
-            <input id="nickname" name="nickname" placeholder="닉네임" />
+            <Input
+              name="nickname"
+              placeholder="닉네임"
+              onChange={handleUserInfo}
+            />
             <input id="file" type="file" />
           </div>
 
@@ -81,14 +115,21 @@ const Signup = () => {
               <span className="spanGrey">선택 사항</span>
             </div>
             <div className="phoneNumber">
-              <select className="phoneNumberFirst">
-                <option key={0}>010</option>
-                <option key={1}>011</option>
-                <option key={2}>016</option>
+              <select
+                className="firstPhoneNumber"
+                name="firstPhoneNumber"
+                onChange={handleFirstPhoneNumber}
+              >
+                <option key={0}>---</option>
+                <option key={1}>010</option>
+                <option key={2}>011</option>
+                <option key={3}>016</option>
               </select>
               <input
-                className="phoneNumberLast"
+                className="lastPhoneNumber"
+                name="lastPhoneNumber"
                 placeholder="휴대폰 번호를 입력해 주세요"
+                onChange={handleLastPhoneNumber}
               />
             </div>
           </div>

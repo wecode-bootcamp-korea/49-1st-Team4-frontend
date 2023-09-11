@@ -49,14 +49,6 @@
           gap: 8px;
           width: 100%;
           height: 120px;
-
-          .email {
-            @include fillInput;
-          }
-
-          .password {
-            @include fillInput;
-          }
         }
       }
 
