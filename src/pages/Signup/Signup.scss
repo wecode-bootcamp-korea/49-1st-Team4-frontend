@@ -140,14 +140,6 @@
           }
         }
       }
-
-      .signUpButton {
-        @include blueButton;
-      }
-
-      .signUpButton.disabled {
-        background-color: $Grey60;
-      }
     }
   }
 }

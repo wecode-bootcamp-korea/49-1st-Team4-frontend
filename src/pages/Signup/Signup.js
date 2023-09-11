@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Signup.scss';
+import Button from '../../components/Button';
 
 const Signup = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -104,12 +105,9 @@ const Signup = () => {
             </div>
           </div>
 
-          <button
-            className={`signUpButton ${isCheckValidation ? '' : 'disabled'}`}
-            disabled={!isCheckValidation}
-          >
+          <Button className="signUpButton" disabled={!isCheckValidation}>
             회원 가입
-          </button>
+          </Button>
         </form>
       </div>
     </div>
