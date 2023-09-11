@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Input from '../../components/Input/Input';
 import './Login.scss';
 
 const Login = () => {
@@ -49,15 +50,15 @@ const Login = () => {
         <div className="container">
           <form className="inputForm">
             <div className="inputBox">
-              <input
-                className="email"
+              <Input
                 name="email"
-                type="text"
+                type="email"
                 placeholder="이메일"
                 onChange={handleUserInfo}
+                babo="a"
               />
-              <input
-                className="password"
+
+              <Input
                 name="password"
                 type="password"
                 placeholder="비밀번호"
