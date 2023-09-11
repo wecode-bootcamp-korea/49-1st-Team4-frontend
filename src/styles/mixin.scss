@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexDirectionColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin fillInput {
+  height: 56px;
+  border: 1px solid $Grey88;
+  border-radius: 8px;
+  padding-left: 16px;
+  font-size: 16px;
+
+  &:focus {
+    border: 2px solid $Black;
+  }
+}
+
+@mixin spaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
