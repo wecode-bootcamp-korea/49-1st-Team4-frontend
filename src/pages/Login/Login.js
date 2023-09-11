@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Login.scss';
+import Button from '../../components/Button/Button';
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
@@ -64,18 +66,17 @@ const Login = () => {
                 onChange={handleUserInfo}
               />
             </div>
-            <button
+            <Button
               className="loginBtn"
-              disabled={!isInputValid}
-              type="button" /*onClick={handleLogin}*/
+              disabled={!isInputValid} /*onClick={handleLogin}*/
             >
               로그인
-            </button>
+            </Button>
           </form>
           <div className="loginOption">
-            <a className="joinBtn" href="#!">
-              회원 가입
-            </a>
+            <Link to="/signup">
+              <p className="joinBtn">회원 가입</p>
+            </Link>
             <div className="divideDiv" />
             <a className="passwordFind" href="#!">
               비밀번호 찾기

@@ -1,0 +1,11 @@
+@import '../../styles/mixin.scss';
+
+.button button {
+  @include blueButton;
+  width: 100%;
+
+  &:disabled {
+    background: $Grey80;
+    cursor: default;
+  }
+}
