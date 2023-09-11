@@ -142,16 +142,7 @@
       }
 
       .signUpButton {
-        height: 56px;
-        margin-top: 24px;
-        border: none;
-        border-radius: 10px;
-        background-color: $Blue;
-        color: $White;
-
-        &:hover {
-          background-color: $Navy;
-        }
+        @include blueButton;
       }
 
       .signUpButton.disabled {

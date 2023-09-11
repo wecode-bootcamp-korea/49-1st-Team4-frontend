@@ -17,8 +17,8 @@ const Signup = () => {
     password === password2 &&
     nickname;
 
-  const handleEmail = e => {
-    const { name, value } = e.target;
+  const handleEmail = event => {
+    const { name, value } = event.target;
     setLoginInfo({ ...loginInfo, [name]: value });
   };
 
