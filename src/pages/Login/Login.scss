@@ -51,55 +51,17 @@
           height: 120px;
 
           .email {
-            align-self: stretch;
-            height: 56px;
-            padding: 19px 0 15px 16px;
-            border: 1px solid $Grey88;
-            border-radius: 6px;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 22px;
-            background-color: $White;
-
-            &:focus {
-              border: 2px solid $Black;
-            }
+            @include fillInput;
           }
 
           .password {
-            align-self: stretch;
-            padding: 19px 0 15px 16px;
-            height: 56px;
-            border: 1px solid $Grey88;
-            border-radius: 6px;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 22px;
-            background-color: $White;
-
-            &:focus {
-              border: 2px solid $Black;
-            }
+            @include fillInput;
           }
         }
 
         .loginBtn {
+          @include blueButton;
           width: 100%;
-          height: 56px;
-          margin-top: 16px;
-          border: 0;
-          outline: 0;
-          border-radius: 6px;
-          font-weight: 800;
-          font-size: 18px;
-          line-height: normal;
-          background: $Blue;
-          color: $White;
-          cursor: pointer;
-
-          &:hover {
-            background: $Navy;
-          }
 
           &:disabled {
             background: $Grey80;
