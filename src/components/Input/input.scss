@@ -1,0 +1,8 @@
+@import '../../styles/mixin.scss';
+
+.input {
+  align-self: stretch;
+}
+.input input {
+  @include fillInput;
+}
