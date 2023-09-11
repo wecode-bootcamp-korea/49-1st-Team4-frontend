@@ -50,16 +50,6 @@
           width: 100%;
           height: 120px;
         }
-
-        .loginBtn {
-          @include blueButton;
-          width: 100%;
-
-          &:disabled {
-            background: $Grey80;
-            cursor: default;
-          }
-        }
       }
 
       .loginOption {
@@ -67,6 +57,10 @@
         gap: 24px;
         width: 240px;
         height: 17px;
+
+        a {
+          text-decoration: none;
+        }
 
         .joinBtn {
           width: 96px;
