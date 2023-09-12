@@ -5,14 +5,18 @@ import Button from '../../components/Button';
 import Input from '../../components/Input/Input';
 
 const Signup = () => {
+  //필수 정보인 email, password, password, password2를 useState를 통하여 관리
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
     password2: '',
     nickname: '',
   });
-
   const { email, password, password2, nickname } = signUpInfo;
+  const handleUserInfo = event => {
+    const { name, value } = event.target;
+    setSignUpInfo({ ...signUpInfo, [name]: value });
+  };
   const isCheckValidation =
     email.includes('@') &&
     email.includes('.') &&
@@ -20,17 +24,12 @@ const Signup = () => {
     password === password2 &&
     nickname;
 
-  const handleUserInfo = event => {
-    const { name, value } = event.target;
-    setSignUpInfo({ ...signUpInfo, [name]: value });
-  };
-  console.log(email, password, password2);
-
+  //휴대폰 번호를 관리
   const [phoneNumber, setPhoneNumber] = useState({
-    firstPhoneNumber: '',
+    firstPhoneNumber: '010',
     lastPhoneNumber: '',
   });
-
+  const { firstPhoneNumber, lastPhoneNumber } = phoneNumber;
   const handleFirstPhoneNumber = event => {
     const { name, value } = event.target;
     setPhoneNumber({ ...phoneNumber, [name]: value });
@@ -39,8 +38,101 @@ const Signup = () => {
     const { name, value } = event.target;
     setPhoneNumber({ ...phoneNumber, [name]: value });
   };
-  console.log(phoneNumber);
+  const addPhoneNumber = firstPhoneNumber + lastPhoneNumber;
 
+  //이미지 파일 관리
+
+  //생일을 관리
+  const [birthday, setBirthday] = useState({
+    year: '',
+    month: '',
+    dates: '',
+  });
+  const { year, month, dates } = birthday;
+  const thisYear = new Date().getFullYear();
+  const lastDateOfMonth = new Date(Number(year), Number(month), 0).getDate();
+  const handleBirthday = event => {
+    const { name, value } = event.target;
+    setBirthday({ ...birthday, [name]: value });
+  };
+
+  const Year = () => {
+    const YearList = [];
+    for (let year = thisYear - 93; year <= thisYear; year++) {
+      YearList.push(
+        <option key={year} value={year}>
+          {year}년
+        </option>,
+      );
+    }
+
+    return (
+      <select
+        className="year"
+        name="year"
+        value={year}
+        onChange={handleBirthday}
+      >
+        <option value="">년도</option>
+        {YearList}
+      </select>
+    );
+  };
+
+  const Month = () => {
+    const MonthList = [];
+    for (let month = 1; month <= 12; month++) {
+      MonthList.push(
+        <option key={month} value={month}>
+          {month}월
+        </option>,
+      );
+    }
+    return (
+      <select
+        value={month}
+        className="month"
+        name="month"
+        onChange={handleBirthday}
+      >
+        <option value="">월</option>
+        {MonthList}
+      </select>
+    );
+  };
+
+  const Dates = () => {
+    const DateList = [];
+    for (let date = 1; date <= lastDateOfMonth; date++) {
+      DateList.push(
+        <option key={date} value={date}>
+          {date}일
+        </option>,
+      );
+    }
+    return (
+      <select
+        value={dates}
+        className="dates"
+        name="dates"
+        onChange={handleBirthday}
+      >
+        <option value="">일</option>
+        {DateList}
+      </select>
+    );
+  };
+
+  const addBrithday =
+    year && month && dates ? new Date(year, month, dates) : '';
+
+  // TODO: 추후 각 select 요소들 하나의 컴포넌트로 구현할 것 (230912 래영 피드백)
+  // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
+  // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
+  // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
+  // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
+
+  //통신을 위한 fetch함수
   const handleSignUp = () => {
     fetch('http://localhost:8000/signup', {
       method: 'POST',
@@ -48,11 +140,11 @@ const Signup = () => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
-        nickname: nickname,
-        phoneNumber: '',
-        birthday: 'YYYY-MM-DD',
+        email,
+        password,
+        nickname,
+        phoneNumber: addPhoneNumber,
+        birthday: addBrithday,
         profileImage: '',
       }),
     })
@@ -75,7 +167,6 @@ const Signup = () => {
               <span>기본 정보</span>
               <span className="spanRed">필수 사항</span>
             </div>
-
             <Input
               name="email"
               type="email"
@@ -120,7 +211,6 @@ const Signup = () => {
                 name="firstPhoneNumber"
                 onChange={handleFirstPhoneNumber}
               >
-                <option key={0}>---</option>
                 <option key={1}>010</option>
                 <option key={2}>011</option>
                 <option key={3}>016</option>
@@ -128,6 +218,7 @@ const Signup = () => {
               <input
                 className="lastPhoneNumber"
                 name="lastPhoneNumber"
+                type="number"
                 placeholder="휴대폰 번호를 입력해 주세요"
                 onChange={handleLastPhoneNumber}
               />
@@ -142,11 +233,15 @@ const Signup = () => {
             <div className="birthday">
               <Year />
               <Month />
-              <Date />
+              <Dates />
             </div>
           </div>
 
-          <Button className="signUpButton" disabled={!isCheckValidation}>
+          <Button
+            className="signUpButton"
+            disabled={!isCheckValidation}
+            onClick={handleSignUp}
+          >
             회원 가입
           </Button>
         </form>
@@ -161,30 +256,6 @@ const BackButton = () => {
       <span>〈</span>뒤로
     </Link>
   );
-};
-
-const Year = () => {
-  const YearList = [];
-  for (let i = 1900; i <= 2023; i++) {
-    YearList.push(<option key={i}>{i}년</option>);
-  }
-  return <select className="year">{YearList}</select>;
-};
-
-const Month = () => {
-  const MonthList = [];
-  for (let i = 1; i <= 12; i++) {
-    MonthList.push(<option key={i}>{i}월</option>);
-  }
-  return <select className="month">{MonthList}</select>;
-};
-
-const Date = () => {
-  const DateList = [];
-  for (let i = 1; i <= 31; i++) {
-    DateList.push(<option key={i}>{i}일</option>);
-  }
-  return <select className="date">{DateList}</select>;
 };
 
 export default Signup;

@@ -1,4 +1,4 @@
-import './input.scss';
+import './Input.scss';
 
 const Input = props => {
   const { name, type, placeholder, onChange } = props;
