@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Signup.scss';
 import Button from '../../components/Button/Button';
@@ -20,7 +21,7 @@ const Signup = () => {
   const isCheckValidation =
     email.includes('@') &&
     email.includes('.') &&
-    password.length >= 10 &&
+    password.length >= 8 &&
     password === password2 &&
     nickname;
 
@@ -38,7 +39,8 @@ const Signup = () => {
     const { name, value } = event.target;
     setPhoneNumber({ ...phoneNumber, [name]: value });
   };
-  const addPhoneNumber = firstPhoneNumber + lastPhoneNumber;
+  const addPhoneNumber =
+    lastPhoneNumber.length === 8 ? firstPhoneNumber + lastPhoneNumber : '';
 
   //이미지 파일 관리
 
@@ -133,8 +135,13 @@ const Signup = () => {
   // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
 
   //통신을 위한 fetch함수
-  const handleSignUp = () => {
-    fetch('http://localhost:8000/signup', {
+  const navigate = useNavigate();
+  const completeSignUp = () => {
+    navigate('/signup-complete');
+  };
+
+  const handleSignUp = event => {
+    fetch('http://10.58.52.214:8000/user/signUp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -148,7 +155,11 @@ const Signup = () => {
         profileImage: '',
       }),
     })
-      .then()
+      .then(response => {
+        if (response.ok) {
+          completeSignUp();
+        }
+      })
       .then();
   };
 
@@ -240,7 +251,7 @@ const Signup = () => {
           <Button
             className="signUpButton"
             disabled={!isCheckValidation}
-            onClick={handleSignUp}
+            handleClick={handleSignUp}
           >
             회원 가입
           </Button>
