@@ -1,0 +1,96 @@
+@import '../../styles/mixin.scss';
+
+.signUpComplete {
+  @include flexCenter;
+  width: 100%;
+  height: 100vh;
+
+  .signUpCompleteBody {
+    width: 576px;
+    height: 844px;
+
+    .signUpCompleteDiv {
+      @include flexDirectionColumn;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 24px 0px 40px 0px;
+      border: 1px solid $Grey60;
+      border-radius: 16px;
+      background: $White;
+      gap: 24px;
+
+      .back {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 56px;
+        padding: 8px 0 8px 16px;
+      }
+
+      .container {
+        @include flexCenter;
+        flex-direction: column;
+        width: 100%;
+        height: 620px;
+        gap: 40px;
+
+        .checkJoinImg {
+          display: flex;
+          width: 136px;
+          height: 136px;
+        }
+
+        .msgBox {
+          @include flexDirectionColumn;
+          align-items: center;
+          gap: 16px;
+
+          .msg1 {
+            font-weight: 800;
+            font-size: 24px;
+            line-height: normal;
+            color: $Black;
+            text-align: center;
+          }
+
+          .msg2 {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 28px;
+            color: $Grey60;
+            text-align: center;
+          }
+        }
+      }
+
+      .btnDiv {
+        @include flexDirectionColumn;
+        align-items: center;
+        width: 100%;
+        padding: 0px 24px;
+        gap: 8px;
+
+        .checkBtn {
+          @include flexCenter;
+          width: 100%;
+          height: 56px;
+          border: 0;
+          outline: 0;
+          border-radius: 6px;
+          font-weight: 800;
+          font-size: 18px;
+          line-height: normal;
+          background: $Blue;
+          color: $White;
+          text-align: center;
+          cursor: pointer;
+
+          &:hover {
+            background: $Navy;
+          }
+        }
+      }
+    }
+  }
+}
