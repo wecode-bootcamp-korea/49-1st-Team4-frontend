@@ -19,24 +19,26 @@ const Login = () => {
   };
 
   const isInputValid =
-    email.includes('@') && email.includes('.') && password.length >= 10;
+    email.includes('@') && email.includes('.') && password.length >= 8;
 
-  // const handleLogin = () => {
-  //   fetch('http://localhost:8000/user/login', {
-  //     method: 'POST',
-  //     headers: [['Content-Type', 'application/json']],
-  //     body: JSON.stringify({
-  //       email: email,
-  //       password: password,
-  //     }),
-  //   })
-  //     .then(req => req.json())
-  //     .then(data => {
-  //       if (data.ACCESS_TOKEN) {
-  //         localStorage.setItem('login-token', data.ACCESS_TOKEN);
-  //       }
-  //     });
-  // };
+  const handleLogin = () => {
+    fetch('http://10.58.52.214:8000/user/signIn', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then(req => req.json())
+      .then(data => {
+        if (data.ACCESS_TOKEN) {
+          localStorage.setItem('login-token', data.ACCESS_TOKEN);
+        }
+      });
+  };
 
   return (
     <div className="login">
@@ -69,7 +71,9 @@ const Login = () => {
             </div>
             <Button
               className="loginBtn"
-              disabled={!isInputValid} /*onClick={handleLogin}*/
+              disabled={!isInputValid}
+              isInputValid
+              handleClick={handleLogin}
             >
               로그인
             </Button>
