@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Signup.scss';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 
 const Signup = () => {
@@ -24,7 +24,7 @@ const Signup = () => {
     const { name, value } = event.target;
     setSignUpInfo({ ...signUpInfo, [name]: value });
   };
-  console.log(email, password, password2);
+  // console.log(email, password, password2);
 
   const [phoneNumber, setPhoneNumber] = useState({
     firstPhoneNumber: '',
