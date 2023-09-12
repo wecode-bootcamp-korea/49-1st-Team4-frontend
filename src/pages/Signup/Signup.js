@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Signup.scss';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 
 const Signup = () => {
