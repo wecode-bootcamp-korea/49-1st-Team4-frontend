@@ -1,0 +1,57 @@
+@import '/src/styles/mixin.scss';
+@import '/src/styles/variable.scss';
+
+.productList {
+  @include flexCenter;
+  width: 100%;
+  height: 100vh;
+
+  .container {
+    @include container;
+    display: grid;
+    grid-template-rows: 7fr 1fr;
+    padding: 24px 24px;
+
+    .main {
+      @include flexDirectionColumn;
+      overflow: scroll;
+
+      gap: 8px;
+
+      .content {
+        .contentHeader {
+          display: flex;
+          justify-content: space-between;
+
+          .user {
+            display: flex;
+            gap: 8px;
+            height: 40px;
+          }
+        }
+        p {
+          line-height: 140%;
+        }
+      }
+    }
+    .write {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 23px;
+
+      button {
+        width: 120px;
+        height: 56px;
+        color: $White;
+        background-color: $Blue;
+        border-radius: 8px;
+        border: none;
+
+        &:hover {
+          background-color: $Navy;
+        }
+      }
+    }
+  }
+}

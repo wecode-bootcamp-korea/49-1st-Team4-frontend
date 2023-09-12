@@ -3,11 +3,16 @@ import '../../styles/variable.scss';
 import './Button.scss';
 
 const Button = props => {
-  const { children, className, disabled } = props;
+  const { children, className, disabled, handleClick } = props;
 
   return (
     <div className="button">
-      <button className={className} disabled={disabled}>
+      <button
+        type="button"
+        className={className}
+        disabled={disabled}
+        onClick={handleClick}
+      >
         {children}
       </button>
     </div>
