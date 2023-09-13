@@ -38,20 +38,15 @@
   border-radius: 15px;
 }
 
-@mixin blueButton {
+@mixin buttonContainer {
+  width: 100%;
   height: 56px;
-  margin-top: 16px;
   border: none;
   outline: 0;
   border-radius: 6px;
   font-weight: 800;
   font-size: 18px;
   line-height: normal;
-  background-color: $Blue;
-  color: $White;
+  text-align: center;
   cursor: pointer;
-
-  &:hover {
-    background-color: $Navy;
-  }
 }
