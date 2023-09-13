@@ -30,6 +30,7 @@ const SignUpComplete = () => {
             type="button"
             className="checkBtn"
             scale="large"
+            shape="fill"
             handleClick={handleGoToLogin}
           >
             확인
