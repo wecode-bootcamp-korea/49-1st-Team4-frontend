@@ -159,8 +159,13 @@ const Signup = () => {
         if (response.ok) {
           completeSignUp();
         }
+        return response.json();
       })
-      .then();
+      .then(result => {
+        if (result.message === 'DUPLICATE_USER_EMAIL') {
+          alert('중복된 이메일 입니다.');
+        }
+      });
   };
 
   return (

@@ -15,6 +15,9 @@
     .main {
       @include flexDirectionColumn;
       overflow: scroll;
+      // .scroll::-webkit-scrollbar {
+      //   display: none;
+      // }
 
       gap: 8px;
 
@@ -25,12 +28,40 @@
 
           .user {
             display: flex;
+            align-items: center;
             gap: 8px;
             height: 40px;
+
+            .isMyPost {
+              display: flex;
+              align-items: center;
+            }
+
+            .profilePhoto {
+              width: 38px;
+              height: 38px;
+              border-radius: 50%;
+            }
+          }
+          .isMyPost {
+            display: flex;
+            align-items: center;
+            gap: 10px;
           }
         }
         p {
+          margin-top: 10px;
           line-height: 140%;
+        }
+
+        .contentFooter {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          div {
+            display: flex;
+            gap: 3px;
+          }
         }
       }
     }

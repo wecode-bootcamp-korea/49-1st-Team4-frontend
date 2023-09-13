@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input';
 import './Login.scss';
 import Button from '../../components/Button/Button';
@@ -21,6 +21,11 @@ const Login = () => {
   const isInputValid =
     email.includes('@') && email.includes('.') && password.length >= 8;
 
+  const navigate = useNavigate();
+  const completeLogin = () => {
+    navigate('/productlist');
+  };
+
   const handleLogin = () => {
     fetch('http://10.58.52.214:8000/user/signIn', {
       method: 'POST',
@@ -32,12 +37,12 @@ const Login = () => {
         password,
       }),
     })
-      .then(req => req.json())
-      .then(data => {
-        if (data.ACCESS_TOKEN) {
-          localStorage.setItem('login-token', data.ACCESS_TOKEN);
+      .then(response => {
+        if (response.ok) {
+          completeLogin();
         }
-      });
+      })
+      .then();
   };
 
   return (
