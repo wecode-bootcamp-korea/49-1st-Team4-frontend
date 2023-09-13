@@ -4,6 +4,7 @@ import Signup from './pages/Signup/Signup';
 import Product from './pages/ProductList/Product/Product';
 import ProductList from './pages/ProductList/ProductList';
 import SignUpComplete from './pages/SignUpComplete/SignUpComplete';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/product" element={<Product />} />
         <Route path="/productlist" element={<ProductList />} />
         <Route path="/signup-complete" element={<SignUpComplete />} />
+        <Route path="/productdetail" element={<ProductDetail />} />
       </Routes>
     </BrowserRouter>
   );

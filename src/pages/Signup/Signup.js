@@ -159,8 +159,13 @@ const Signup = () => {
         if (response.ok) {
           completeSignUp();
         }
+        return response.json();
       })
-      .then();
+      .then(result => {
+        if (result.message === 'DUPLICATE_USER_EMAIL') {
+          alert('중복된 이메일 입니다.');
+        }
+      });
   };
 
   return (
@@ -226,7 +231,7 @@ const Signup = () => {
                 <option key={2}>011</option>
                 <option key={3}>016</option>
               </select>
-              <input
+              <Input
                 className="lastPhoneNumber"
                 name="lastPhoneNumber"
                 type="number"
