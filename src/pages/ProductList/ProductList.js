@@ -8,12 +8,6 @@ const ProductList = () => {
       .then(Response => Response.json())
       .then(result => setContentInfo(result));
   }, []);
-
-  const [like, setLike] = useState(contentInfo?.isLiked);
-  const handleLike = () => {
-    setLike(!like);
-  };
-
   return (
     <div className="productList">
       <div className="container">
@@ -44,19 +38,10 @@ const ProductList = () => {
                 </div>
                 <p>{info.content}</p>
                 <div className="contentFooter">
-                  {like ? (
-                    <img
-                      src="/images/post_mu.png"
-                      alt="heart"
-                      onClick={handleLike}
-                    />
-                  ) : (
-                    <img
-                      src="/images/heart.png"
-                      alt="heart"
-                      onClick={handleLike}
-                    />
-                  )}
+                  {/* <img src="/images/post_mu.png" alt="heart" /> */}
+
+                  <img src="/images/heart.png" alt="heart" />
+
                   <div>
                     <span>좋아요</span>
                     <span>{info.likeCount}</span>

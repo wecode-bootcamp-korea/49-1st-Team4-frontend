@@ -24,7 +24,7 @@
     "profileImage": "https://wecode",
     "isMyPost": true,
     "content": "박코드의 컨텐츠",
-    "isLiked": false,
+    "isLiked": true,
     "likeCount": 3,
     "comments": [
       {
@@ -46,6 +46,188 @@
   },
   {
     "postId": 3,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": false,
+    "content": "김코드의 컨텐츠",
+    "isLiked": false,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 4,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": false,
+    "content": "김코드의 컨텐츠",
+    "isLiked": true,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 5,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": true,
+    "content": "김코드의 컨텐츠",
+    "isLiked": true,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 6,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": false,
+    "content": "김코드의 컨텐츠",
+    "isLiked": true,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 7,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": true,
+    "content": "김코드의 컨텐츠",
+    "isLiked": false,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 8,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": true,
+    "content": "김코드의 컨텐츠",
+    "isLiked": false,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 9,
+    "nickname": "김코드",
+    "profileImage": "https://wecode",
+    "isMyPost": true,
+    "content": "김코드의 컨텐츠",
+    "isLiked": false,
+    "likeCount": 6,
+    "comments": [
+      {
+        "commentId": 1,
+        "nickname": "lee",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      },
+      {
+        "commentId": 2,
+        "nickname": "kim",
+        "comment": "좋은 말씀이십니다.",
+        "isMyReply": false,
+        "createdAt": "2023-08-16T~~~~"
+      }
+    ],
+    "createdAt": "2023-08-16T~~~~"
+  },
+  {
+    "postId": 10,
     "nickname": "김코드",
     "profileImage": "https://wecode",
     "isMyPost": true,

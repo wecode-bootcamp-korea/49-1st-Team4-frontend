@@ -14,11 +14,7 @@
 
     .main {
       @include flexDirectionColumn;
-      overflow: scroll;
-      // .scroll::-webkit-scrollbar {
-      //   display: none;
-      // }
-
+      overflow-y: scroll;
       gap: 8px;
 
       .content {
@@ -64,6 +60,9 @@
           }
         }
       }
+    }
+    .main::-webkit-scrollbar {
+      display: none;
     }
     .write {
       display: flex;
