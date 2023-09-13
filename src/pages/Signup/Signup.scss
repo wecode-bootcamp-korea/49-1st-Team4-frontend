@@ -103,7 +103,6 @@
           }
 
           .lastPhoneNumber {
-            @include fillInput;
             width: 384px;
           }
           input[type='number']::-webkit-outer-spin-button,
