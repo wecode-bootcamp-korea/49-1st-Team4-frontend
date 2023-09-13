@@ -71,13 +71,25 @@ const Product = () => {
             </div>
           </div>
           <div className="btnBox">
-            <div className="btnline">
-              <Button className="cancel" onClick={handleCancel}>
+            <div className="button">
+              <Button
+                type="button"
+                className="cancel"
+                scale="small"
+                shape="outline"
+                handleClick={handleCancel}
+              >
                 취소
               </Button>
-              <button className="posting" onClick={handlePosting}>
+              <Button
+                type="button"
+                className="posting"
+                scale="small"
+                shape="fill"
+                onClick={handlePosting}
+              >
                 게시
-              </button>
+              </Button>
             </div>
           </div>
         </form>

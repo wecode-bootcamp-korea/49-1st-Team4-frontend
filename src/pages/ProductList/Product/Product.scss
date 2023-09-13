@@ -88,68 +88,9 @@
         padding-top: 24px;
         border-top: 1px solid $Grey88;
 
-        .btnline {
+        .button {
           display: flex;
           justify-content: space-between;
-          width: 100%;
-
-          .cancel {
-            width: 120px;
-            height: 56px;
-            border: 1px solid $Blue;
-            border-radius: 6px;
-            font-weight: 800;
-            font-size: 18px;
-            line-height: normal;
-            background: $White;
-            color: $Blue;
-            text-align: center;
-            cursor: pointer;
-
-            &:active {
-              border: 1px solid $Navy;
-              color: $Navy;
-            }
-
-            &:hover {
-              border: 1px solid $Navy;
-              color: $Navy;
-            }
-
-            &:disabled {
-              border: 1px solid #ccc;
-              color: $Grey60;
-              cursor: default;
-            }
-          }
-
-          .posting {
-            width: 120px;
-            height: 56px;
-            border: 0;
-            outline: 0;
-            border-radius: 6px;
-            font-weight: 800;
-            font-size: 18px;
-            line-height: normal;
-            background: $Blue;
-            color: $White;
-            text-align: center;
-            cursor: pointer;
-
-            &:active {
-              background: $Navy;
-            }
-
-            &:hover {
-              background: $Navy;
-            }
-
-            &:disabled {
-              background: #cccccc;
-              cursor: default;
-            }
-          }
         }
       }
     }

@@ -29,6 +29,7 @@ const SignUpComplete = () => {
           <Button
             type="button"
             className="checkBtn"
+            scale="large"
             handleClick={handleGoToLogin}
           >
             확인
