@@ -36,7 +36,7 @@
     }
 
     &:disabled {
-      border: 1px solid #ccc;
+      border: 1px solid $Grey80;
       color: $Grey60;
       cursor: default;
     }
