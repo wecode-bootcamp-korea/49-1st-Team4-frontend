@@ -69,19 +69,12 @@
       justify-content: flex-end;
       align-items: center;
       padding-right: 23px;
+    }
 
-      button {
-        width: 120px;
-        height: 56px;
-        color: $White;
-        background-color: $Blue;
-        border-radius: 8px;
-        border: none;
-
-        &:hover {
-          background-color: $Navy;
-        }
-      }
+    .button {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
   }
 }

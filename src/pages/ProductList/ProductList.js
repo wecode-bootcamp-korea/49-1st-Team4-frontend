@@ -1,13 +1,50 @@
 import { useState, useEffect } from 'react';
 import './ProductList.scss';
+import Button from '../../components/Button/Button';
 
 const ProductList = () => {
   const [contentInfo, setContentInfo] = useState([]);
+  // useEffect(() => {
+  //   fetch('http://10.58.52.216:8000/thread/check', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //     },
+  //   })
+  //     .then(Response => Response.json())
+  //     .then(result => setContentInfo(result));
+  // }, []);
   useEffect(() => {
     fetch('/data/mockData.json')
       .then(Response => Response.json())
       .then(result => setContentInfo(result));
   }, []);
+
+  // const handleLiked = () => {
+  //   fetch('http://10.58.52.216:8000/thread/check', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //     },
+  //     body: JSON.stringify({}),
+  //   })
+  //     .then()
+  //     .then();
+  // };
+
+  // const handleDelete = () => {
+  //   fetch('http://10.58.52.216:8000/thread/check', {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //     },
+  //     body: JSON.stringify({
+  //       postId: '',
+  //     }),
+  //   })
+  //     .then()
+  //     .then();
+  // };
   return (
     <div className="productList">
       <div className="container">
@@ -38,9 +75,11 @@ const ProductList = () => {
                 </div>
                 <p>{info.content}</p>
                 <div className="contentFooter">
-                  {/* <img src="/images/post_mu.png" alt="heart" /> */}
-
-                  <img src="/images/heart.png" alt="heart" />
+                  {info.isLiked ? (
+                    <img src="/images/post_mu.png" alt="heart" />
+                  ) : (
+                    <img src="/images/heart.png" alt="heart" />
+                  )}
 
                   <div>
                     <span>좋아요</span>
@@ -56,9 +95,14 @@ const ProductList = () => {
             );
           })}
         </div>
-        <div className="write">
-          <button>글 쓰기</button>
-        </div>
+        <Button
+          type="button"
+          className="writeButton"
+          scale="small"
+          shape="fill"
+        >
+          글 쓰기
+        </Button>
       </div>
     </div>
   );

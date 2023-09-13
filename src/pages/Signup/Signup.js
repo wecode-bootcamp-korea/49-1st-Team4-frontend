@@ -231,7 +231,7 @@ const Signup = () => {
                 <option key={2}>011</option>
                 <option key={3}>016</option>
               </select>
-              <input
+              <Input
                 className="lastPhoneNumber"
                 name="lastPhoneNumber"
                 type="number"
