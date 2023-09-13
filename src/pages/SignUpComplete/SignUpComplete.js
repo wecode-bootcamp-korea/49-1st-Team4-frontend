@@ -26,15 +26,14 @@ const SignUpComplete = () => {
               <div className="msg2">이제 로그인해주세요.</div>
             </div>
           </div>
-          <div className="btnDiv">
-            <Button
-              type="button"
-              className="checkBtn"
-              handleClick={handleGoToLogin}
-            >
-              확인
-            </Button>
-          </div>
+          <Button
+            type="button"
+            className="checkBtn"
+            scale="large"
+            handleClick={handleGoToLogin}
+          >
+            확인
+          </Button>
         </div>
       </div>
     </div>

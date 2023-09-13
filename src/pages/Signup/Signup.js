@@ -254,7 +254,10 @@ const Signup = () => {
           </div>
 
           <Button
+            type="button"
             className="signUpButton"
+            scale="large"
+            shape="fill"
             disabled={!isCheckValidation}
             handleClick={handleSignUp}
           >

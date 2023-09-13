@@ -75,9 +75,11 @@ const Login = () => {
               />
             </div>
             <Button
+              type="button"
               className="loginBtn"
+              scale="large"
+              shape="fill"
               disabled={!isInputValid}
-              isInputValid
               handleClick={handleLogin}
             >
               로그인

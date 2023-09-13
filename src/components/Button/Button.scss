@@ -1,11 +1,44 @@
 @import '../../styles/mixin.scss';
 
 .button button {
-  @include blueButton;
-  width: 100%;
+  @include buttonContainer;
 
-  &:disabled {
-    background: $Grey80;
-    cursor: default;
+  &[scale='large'] {
+    margin-top: 16px;
+  }
+
+  &[scale='small'] {
+    width: 120px;
+  }
+
+  &[shape='fill'] {
+    background-color: $Blue;
+    color: $White;
+
+    &:hover {
+      background-color: $Navy;
+    }
+
+    &:disabled {
+      background: $Grey80;
+      cursor: default;
+    }
+  }
+
+  &[shape='outline'] {
+    border: 1px solid $Blue;
+    background: $White;
+    color: $Blue;
+
+    &:hover {
+      border: 1px solid $Navy;
+      color: $Navy;
+    }
+
+    &:disabled {
+      border: 1px solid #ccc;
+      color: $Grey60;
+      cursor: default;
+    }
   }
 }

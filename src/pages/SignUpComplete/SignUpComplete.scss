@@ -64,32 +64,12 @@
         }
       }
 
-      .btnDiv {
+      .button {
         @include flexDirectionColumn;
         align-items: center;
         width: 100%;
         padding: 0px 24px;
         gap: 8px;
-
-        .checkBtn {
-          @include flexCenter;
-          width: 100%;
-          height: 56px;
-          border: 0;
-          outline: 0;
-          border-radius: 6px;
-          font-weight: 800;
-          font-size: 18px;
-          line-height: normal;
-          background: $Blue;
-          color: $White;
-          text-align: center;
-          cursor: pointer;
-
-          &:hover {
-            background: $Navy;
-          }
-        }
       }
     }
   }

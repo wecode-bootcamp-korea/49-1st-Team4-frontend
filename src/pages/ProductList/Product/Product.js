@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Product.scss';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../../components/Button/Button';
 
 const Product = () => {
   const navigate = useNavigate();
@@ -9,45 +10,44 @@ const Product = () => {
     navigate('/productList');
   };
 
-  // const today = new Date();
-
-  const [post, setPost] = useState({
-    // nickname: '',
+  const [content, setContent] = useState({
     content: '',
-    // createAt: '',
   });
 
-  const { content, createAt } = post;
+  const [loginToken, setLoginToken] = useState('');
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('login-token');
+    setLoginToken(token);
+  }, []);
 
   const handlePostInfo = event => {
     const { name, value } = event.target;
 
-    setPost({ ...post, [name]: value });
+    setContent({ ...content, [name]: value });
   };
 
-  // console.log(post);
-
   const handlePosting = event => {
-    event.preventDefault();
-
-    fetch('http://localhost:8000/post/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: localStorage.getItem('login-token'),
-      },
-      body: JSON.stringify({
-        content: content,
-        createAt: createAt,
-      }),
-    })
-      .then(req => req.json())
-      .then(data => {
-        if (data.status === 200) {
-          alert('등록되었습니다.');
-          navigate('/productList');
-        }
-      });
+    if (loginToken) {
+      fetch('url주소', {
+        //백엔드 서버 url 확인하기
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: loginToken,
+        },
+        body: JSON.stringify({
+          content: content,
+        }),
+      })
+        .then(req => req.json())
+        .then(data => {
+          if (data.ok) {
+            alert('등록되었습니다.');
+            navigate('/productList');
+          }
+        });
+    }
   };
 
   return (
@@ -57,10 +57,10 @@ const Product = () => {
           <div className="publish">
             <div className="container">
               <div className="profileImg">
-                <div className="image" />
+                <img className="image" src="/images/Pic.jpg" alt="프로필사진" />
               </div>
               <div className="contentDiv">
-                <div className="nickname">Name</div>
+                <div className="nickname">김코딩</div>
                 <textarea
                   name="content"
                   className="content"
@@ -71,13 +71,25 @@ const Product = () => {
             </div>
           </div>
           <div className="btnBox">
-            <div className="btnline">
-              <button className="cancel" onClick={handleCancel}>
+            <div className="button">
+              <Button
+                type="button"
+                className="cancel"
+                scale="small"
+                shape="outline"
+                handleClick={handleCancel}
+              >
                 취소
-              </button>
-              <button className="posting" onClick={handlePosting}>
+              </Button>
+              <Button
+                type="button"
+                className="posting"
+                scale="small"
+                shape="fill"
+                onClick={handlePosting}
+              >
                 게시
-              </button>
+              </Button>
             </div>
           </div>
         </form>
