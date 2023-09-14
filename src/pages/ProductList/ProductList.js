@@ -64,7 +64,7 @@ const ProductList = () => {
     });
   };
   const moveEdit = (event, key) => {
-    navigate('/productEdit', {
+    navigate('/product', {
       state: contentInfo[key - 1],
     });
   };
