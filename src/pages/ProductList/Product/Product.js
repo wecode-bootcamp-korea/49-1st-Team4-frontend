@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Product.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
 
 const Product = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const state1 = location.state;
+  console.log(state1);
 
   const handleCancel = () => {
     navigate('/productList');
@@ -25,7 +30,7 @@ const Product = () => {
     setProfileImage(profileImage);
 
     // if (isPostId) {
-    //   fetch('http://10.58.52.216:8000/thread/?', {
+    //   fetch('http://10.58.52.216:8000/thread/', {
     //     //백엔드 서버 url 확인하기 -> 글 상세화면 api
     //     method: 'GET',
     //     headers: {
