@@ -15,7 +15,10 @@ const ProductList = () => {
   //       'Content-Type': 'application/json;charset=utf-8',
   //     },
   //   })
-  //     .then(Response => Response.json())
+  //     .then(response => {
+  //       console.log(response);
+  //       response.json();
+  //     })
   //     .then(result => {
   //       console.log(result.data);
   //       setContentInfo(result.data);

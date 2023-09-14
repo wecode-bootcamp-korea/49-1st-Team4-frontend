@@ -48,7 +48,7 @@ const Signup = () => {
     }
   };
 
-  //이미지 파일 관리
+  //이미지 파일 관리 구현 실패
 
   //생일을 관리
   const [birthday, setBirthday] = useState({
@@ -135,7 +135,6 @@ const Signup = () => {
     year && month && dates
       ? `${year}-${month.padStart(2, '0')}-${dates.padStart(2, '0')}`
       : '';
-  console.log(addBrithday);
 
   // TODO: 추후 각 select 요소들 하나의 컴포넌트로 구현할 것 (230912 래영 피드백)
   // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
@@ -150,7 +149,7 @@ const Signup = () => {
   };
 
   const handleSignUp = event => {
-    fetch('http://10.58.52.216:8000/user/signUp', {
+    fetch('http://10.58.52.233:8000/user/signUp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

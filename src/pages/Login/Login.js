@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    fetch('http://10.58.52.216:8000/user/signIn', {
+    fetch('http://10.58.52.233:8000/user/signIn', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -38,15 +38,23 @@ const Login = () => {
         password,
       }),
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          completeLogin();
+        }
+        return response.json();
+      })
       .then(result => {
-        if (result.message === 'LOGIN_SUCCESSS') {
+        if (result.message === 'LOGIN_SUCCESS') {
           localStorage.setItem('login-token', result.accessToken);
           localStorage.setItem('userInfo', {
             nickname: '김코딩',
             profileImage: '/images/Pic.jpg',
           });
-          completeLogin();
+        } else if (result.message === 'EMAIL_DOES_NOT_EXIST') {
+          alert('아이디가 일치하지 않습니다.');
+        } else if (result.message === 'INCORRECT_PASSWORD') {
+          alert('비밀번호가 일치하지 않습니다.');
         }
       });
   };
