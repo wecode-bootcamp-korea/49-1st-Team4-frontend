@@ -45,9 +45,21 @@
             gap: 10px;
           }
         }
+
+        .edit,
+        .delete {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
         p {
           margin-top: 10px;
           line-height: 140%;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
 
         .contentFooter {

@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Signup.scss';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
+import BackButton from '../../components/BackButton/BackButton';
 
 const Signup = () => {
   //필수 정보인 email, password, password, password2를 useState를 통하여 관리
@@ -41,6 +41,12 @@ const Signup = () => {
   };
   const addPhoneNumber =
     lastPhoneNumber.length === 8 ? firstPhoneNumber + lastPhoneNumber : '';
+
+  const onInput = e => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
+  };
 
   //이미지 파일 관리
 
@@ -126,7 +132,10 @@ const Signup = () => {
   };
 
   const addBrithday =
-    year && month && dates ? new Date(year, month, dates) : '';
+    year && month && dates
+      ? `${year}-${month.padStart(2, '0')}-${dates.padStart(2, '0')}`
+      : '';
+  console.log(addBrithday);
 
   // TODO: 추후 각 select 요소들 하나의 컴포넌트로 구현할 것 (230912 래영 피드백)
   // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
@@ -141,7 +150,7 @@ const Signup = () => {
   };
 
   const handleSignUp = event => {
-    fetch('http://10.58.52.214:8000/user/signUp', {
+    fetch('http://10.58.52.216:8000/user/signUp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -152,7 +161,7 @@ const Signup = () => {
         nickname,
         phoneNumber: addPhoneNumber,
         birthday: addBrithday,
-        profileImage: '',
+        // profileImage: '',
       }),
     })
       .then(response => {
@@ -172,7 +181,7 @@ const Signup = () => {
     <div className="signUp">
       <div className="container">
         <div className="containerHeader">
-          <BackButton />
+          <BackButton to="/" />
         </div>
 
         <form className="signUpForm">
@@ -237,6 +246,8 @@ const Signup = () => {
                 type="number"
                 placeholder="휴대폰 번호를 입력해 주세요"
                 onChange={handleLastPhoneNumber}
+                onInput={onInput}
+                maxLength="8"
               />
             </div>
           </div>
@@ -268,13 +279,4 @@ const Signup = () => {
     </div>
   );
 };
-
-const BackButton = () => {
-  return (
-    <Link className="backButton" to="/">
-      <span>〈</span>뒤로
-    </Link>
-  );
-};
-
 export default Signup;

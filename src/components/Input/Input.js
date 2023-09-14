@@ -1,7 +1,8 @@
 import './Input.scss';
 
 const Input = props => {
-  const { className, name, type, placeholder, onChange } = props;
+  const { className, name, type, placeholder, onChange, onInput, maxLength } =
+    props;
 
   return (
     <div className="input">
@@ -11,6 +12,8 @@ const Input = props => {
         type={type}
         placeholder={placeholder}
         onChange={onChange}
+        onInput={onInput}
+        maxLength={maxLength}
       />
     </div>
   );
