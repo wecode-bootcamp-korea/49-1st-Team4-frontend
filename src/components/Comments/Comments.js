@@ -11,7 +11,7 @@ const Comments = props => {
           <div>{nickname}</div>
           <div>{comment}</div>
         </div>
-        <div>{createdAt}</div>
+        <div>{createdAt.substr(0, 10)}</div>
       </div>
     </div>
   );

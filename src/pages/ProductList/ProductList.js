@@ -1,6 +1,6 @@
+import Button from '../../components/Button/Button';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
 import './ProductList.scss';
 
 const ProductList = () => {
@@ -8,26 +8,24 @@ const ProductList = () => {
   const [contentInfo, setContentInfo] = useState([]);
 
   // 실제 데이터 fetch 함수(GET)
-  // useEffect(() => {
-  //   fetch('http://10.58.52.233:8000/thread/check', {
-  //     method: 'GET',
-  //   })
-  //     .then(response => {
-  //       console.log(response);
-  //       response.json();
-  //     })
-  //     .then(result => {
-  //       console.log(result);
-  //       setContentInfo(result);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch('http://10.58.52.233:8000/thread', {
+      method: 'GET',
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        setContentInfo(result);
+      });
+  }, []);
 
   // mockdata fetch 함수
-  useEffect(() => {
-    fetch('/data/mockData.json')
-      .then(response => response.json())
-      .then(result => setContentInfo(result));
-  }, []);
+  // useEffect(() => {
+  //   fetch('/data/mockData.json')
+  //     .then(response => response.json())
+  //     .then(result => setContentInfo(result));
+  // }, []);
 
   // 좋아요 관련 fetch 함수
   // const handleLiked = () => {
@@ -58,16 +56,18 @@ const ProductList = () => {
   //     .then();
   // };
 
-  const move = (event, key) => {
+  //event를 안받는것에 대한 해결
+  const moveDetail = (event, key) => {
     const equalizeKey = key - 1;
     navigate('/productdetail', {
-      state: contentInfo[equalizeKey],
+      state: contentInfo.data[equalizeKey],
     });
   };
+
   const moveEdit = (event, key) => {
     const equalizeKey = key - 1;
     navigate('/productedit', {
-      state: contentInfo[equalizeKey],
+      state: contentInfo.data[equalizeKey],
     });
   };
 
@@ -75,26 +75,31 @@ const ProductList = () => {
     navigate('/product');
   };
 
+  //early return 일단 임시적으로
+  if (contentInfo.length === 0) {
+    return <div />;
+  }
+
   return (
     <div className="productList">
       <div className="container">
         {/* TODO map으로 반복되는 것 컴포넌트화 하기 0913 지수님 피드백 */}
         <div className="main">
-          {contentInfo?.map(info => {
+          {contentInfo.data.map(info => {
             return (
               <div className="content" key={info.postId}>
                 <div className="contentHeader">
                   <div className="user">
                     <img
-                      src="/images/atom.PNG"
-                      alt="😀"
+                      src="/images/default.PNG"
+                      alt="profileImage"
                       className="profilePhoto"
                     />
                     {info.nickname}
                   </div>
                   {info.isMyPost ? (
                     <div className="isMyPost">
-                      <span>{info.createdAt}</span>
+                      <span>{info.createdAt.substr(0, 10)}</span>
                       <span className="delete">삭제</span>
                       <span
                         className="edit"
@@ -106,12 +111,12 @@ const ProductList = () => {
                     </div>
                   ) : (
                     <div className="isMyPost">
-                      <div>{info.createdAt}</div>
+                      <div>{info.createdAt.substr(0, 10)}</div>
                     </div>
                   )}
                 </div>
                 <p
-                  onClick={event => move(event, info.postId)}
+                  onClick={event => moveDetail(event, info.postId)}
                   key={info.postId}
                 >
                   {info.content}
@@ -129,7 +134,7 @@ const ProductList = () => {
                   </div>
                   <div>
                     <span>댓글</span>
-                    <span>{info.comments.length}</span>
+                    <span>{info.comments?.length}</span>
                   </div>
                 </div>
                 <hr />

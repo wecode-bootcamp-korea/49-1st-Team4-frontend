@@ -10,7 +10,8 @@ const ProductDetail = () => {
   // data 받아오기
   const location = useLocation();
   const info = location.state;
-  // console.log(info.comments[0].nickname);
+  console.log(info);
+  console.log(window.localStorage.getItem('login-token'));
 
   // 댓글 관리
   const [comment, setComment] = useState('');
@@ -18,19 +19,17 @@ const ProductDetail = () => {
     setComment(event.target.value);
   };
   const handlePost = () => {
-    fetch('http://10.58.52.233:8000/user/', {
+    fetch('http://10.58.52.233:8000/comment/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: '토큰',
+        authorization: window.localStorage.getItem('login-token'),
       },
       body: JSON.stringify({
-        postId: 1,
+        postId: info.postId,
         comment,
       }),
-    })
-      .then(response => {})
-      .then(result => {});
+    });
   };
 
   return (
@@ -62,7 +61,7 @@ const ProductDetail = () => {
           </Button>
         </div>
 
-        {info.comments.map(value => {
+        {info.comments?.map(value => {
           return <Comments info={value} key={value.commentId} />;
         })}
         <div />

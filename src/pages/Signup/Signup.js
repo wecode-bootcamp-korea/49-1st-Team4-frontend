@@ -1,6 +1,6 @@
+import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import BackButton from '../../components/BackButton/BackButton';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.scss';
@@ -162,18 +162,13 @@ const Signup = () => {
         birthday: addBrithday,
         // profileImage: '',
       }),
-    })
-      .then(response => {
-        if (response.ok) {
-          completeSignUp();
-        }
-        return response.json();
-      })
-      .then(result => {
-        if (result.message === 'DUPLICATE_USER_EMAIL') {
-          alert('중복된 이메일 입니다.');
-        }
-      });
+    }).then(response => {
+      if (response.json().message === 'DUPLICATE_USER_EMAIL') {
+        alert('중복된 이메일 입니다.');
+      } else if (response.ok) {
+        completeSignUp();
+      }
+    });
   };
 
   return (
