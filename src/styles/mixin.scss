@@ -39,6 +39,7 @@
 }
 
 @mixin buttonContainer {
+  @include flexCenter;
   width: 100%;
   height: 56px;
   border: none;
