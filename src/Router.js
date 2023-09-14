@@ -6,6 +6,7 @@ import ProductEdit from './pages/ProductList/ProductEdit/ProductEdit';
 import ProductList from './pages/ProductList/ProductList';
 import SignUpComplete from './pages/SignUpComplete/SignUpComplete';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import ProductEdit from './pages/ProductList/ProductEdit/ProductEdit';
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/productlist" element={<ProductList />} />
         <Route path="/signup-complete" element={<SignUpComplete />} />
         <Route path="/productdetail" element={<ProductDetail />} />
+        <Route path="/productedit" element={<ProductEdit />} />
       </Routes>
     </BrowserRouter>
   );

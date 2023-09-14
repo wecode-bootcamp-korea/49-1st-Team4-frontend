@@ -7,5 +7,17 @@
 
   .container {
     @include container;
+    @include flexDirectionColumn;
+    gap: 20px;
+    padding: 20px 25px;
+
+    .commentBox {
+      display: flex;
+      justify-content: space-between;
+
+      .commentInput {
+        width: 390px;
+      }
+    }
   }
 }
