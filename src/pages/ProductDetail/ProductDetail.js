@@ -8,7 +8,8 @@ import Input from '../../components/Input/Input';
 const ProductDetail = () => {
   const location = useLocation();
   const info = location.state;
-  console.log(info);
+  // console.log(info);
+  // console.log(info.isMyPost ? '' : 'display');
 
   const [comment, setComment] = useState('');
   const handleComment = event => {
@@ -20,7 +21,8 @@ const ProductDetail = () => {
         <BackButton to="/productlist" />
 
         <div>
-          <span>content</span>
+          <div>{info.nickname}</div>
+          <div>{info.content}</div>
         </div>
 
         <div className="commentBox">
