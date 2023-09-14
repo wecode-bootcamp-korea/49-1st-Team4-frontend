@@ -15,16 +15,10 @@ const ProductEdit = () => {
   };
 
   const [content, setContent] = useState('');
-  // const [profileImage, setProfileImage] = useState(' ');
 
-  const token = window.localStorage.getItem('login-token');
+  const token = window.localStorage.getItem('loginToken');
 
   // useEffect(() => {
-  //   const userInfo = window.localStorage.getItem('userInfo');
-  //   const { profileImage } = JSON.parse(userInfo);
-
-  //   setProfileImage(profileImage);
-
   //   if (isPostId !== null) {
   //     fetch('http://10.58.52.216:8000/thread/?', {
   //       //백엔드 서버 url 확인하기 -> 글 상세화면 api
@@ -32,6 +26,7 @@ const ProductEdit = () => {
   //       headers: {
   //         'Content-Type': 'application/json',
   //         authorization: token,
+  //         // postId : postId,
   //       },
   //     })
   //       .then(response => {
@@ -53,33 +48,33 @@ const ProductEdit = () => {
 
   const isCheckContent = content.length >= 1;
 
-  const handleUpdating = event => {
+  const handleUpdating = () => {
     if (token) {
-      fetch('url주소', {
-        //백엔드 서버 url 확인하기
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: token,
-        },
-        body: JSON.stringify({
-          content: content,
-        }),
-      })
-        .then(response => {
-          if (response.ok) {
-            alert('수정되었습니다.');
-            navigate('/productList');
-          }
-          return response.json();
+      if (isCheckContent) {
+        fetch('url주소', {
+          //백엔드 서버 url 확인하기
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: token,
+          },
+          body: JSON.stringify({
+            content: content,
+          }),
         })
-        .then(result => {
-          //에러 조건확인하기 -> content에 1글자 이상 작성해야 가능하다.
-          if (result.message === '') {
-            alert('수정할 내용을 작성해주세요.');
-            return;
-          }
-        });
+          .then(response => response.json())
+          .then(result => {
+            console.log(result);
+            // if (result.message === '') {
+            //   alert('등록되었습니다.');
+            //   navigate('/productList');
+            // } else {
+            //   alert('오류가 발생했습니다.');
+            // }
+          });
+      } else {
+        alert('글을 작성해주세요.');
+      }
     } else {
       alert('로그인 후 글 작성이 가능합니다.');
       navigate('/');
@@ -124,7 +119,7 @@ const ProductEdit = () => {
                 scale="small"
                 shape="fill"
                 disabled={!isCheckContent}
-                onClick={handleUpdating}
+                handleClick={handleUpdating}
               >
                 게시
               </Button>

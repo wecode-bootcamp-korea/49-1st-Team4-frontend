@@ -10,8 +10,6 @@ const ProductDetail = () => {
   // data 받아오기
   const location = useLocation();
   const info = location.state;
-  console.log(info);
-  console.log(window.localStorage.getItem('login-token'));
 
   // 댓글 관리
   const [comment, setComment] = useState('');
@@ -23,7 +21,7 @@ const ProductDetail = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: window.localStorage.getItem('login-token'),
+        authorization: window.localStorage.getItem('loginToken'),
       },
       body: JSON.stringify({
         postId: info.postId,

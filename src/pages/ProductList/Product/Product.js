@@ -11,62 +11,62 @@ const Product = () => {
   };
 
   const [content, setContent] = useState('');
-  // const [nickname, setNickname] = useState('');
-  // const [profileImage, setProfileImage] = useState('');
+  const [profile, setProfile] = useState('');
+  const [nickname, setNickname] = useState('');
 
-  const token = window.localStorage.getItem('login-token');
+  const isCheckContent = content.length >= 1;
 
-  // useEffect(() => {
-  //   console.log('시작');
-  //   const userInfo = window.localStorage.getItem('userInfo');
-  //   const { nickname, profileImage } = JSON.parse(userInfo);
-  //   console.log('다음');
-  //   setNickname(nickname);
-  //   setProfileImage(profileImage);
-  // }, []);
+  const token = window.localStorage.getItem('loginToken');
+
+  useEffect(() => {
+    fetch('http://10.58.52.233:8000/user/profile', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token,
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        setProfile(result.data[0].profileImage);
+        setNickname(result.data[0].nickname);
+      });
+  }, []);
 
   const handlePostInfo = event => {
     setContent(event.target.value);
   };
 
-  const isCheckContent = content.length >= 1;
-
-  const handlePosting = event => {
+  const handlePosting = () => {
     if (token) {
-      fetch('http://10.58.52.233:8000/thread/post', {
-        //백엔드 서버 url 확인하기
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: token,
-        },
-        body: JSON.stringify({
-          content: content,
-        }),
-      }).then(response => {
-        console.log(response);
-        // if (response.ok) {
-        //   alert('등록되었습니다.');
-        //   navigate('/productList');
-        // }
-        // return response.json();
-      });
-      // .then(result => {
-      //   console.log(result);
-      //   //에러 조건확인하기 -> content에 1글자 이상 작성해야 가능하다.
-      //   // if (result.message === '') {
-      //   //   alert('글을 작성해주세요.');
-      //   //   return;
-      //   // }
-      // });
+      if (isCheckContent) {
+        fetch('http://10.58.52.233:8000/thread', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: token,
+          },
+          body: JSON.stringify({
+            content: content,
+          }),
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.message === 'THREAD_CREATED') {
+              alert('등록되었습니다.');
+              navigate('/productList');
+            } else {
+              alert('오류가 발생했습니다.');
+            }
+          });
+      } else {
+        alert('글을 작성해주세요.');
+      }
     } else {
       alert('로그인 후 글 작성이 가능합니다.');
       navigate('/');
     }
   };
-
-  const imageUrl = '/images/Pic.jpg';
-  const nickname = 'wecode';
 
   return (
     <div className="product">
@@ -75,7 +75,7 @@ const Product = () => {
           <div className="publish">
             <div className="container">
               <div className="profileImg">
-                <img className="image" src={imageUrl} alt="프로필사진" />
+                <img className="image" src={profile} alt="프로필사진" />
               </div>
               <div className="contentDiv">
                 <div className="nickname">{nickname}</div>
@@ -105,7 +105,7 @@ const Product = () => {
                 scale="small"
                 shape="fill"
                 disabled={!isCheckContent}
-                onClick={handlePosting}
+                handleClick={handlePosting}
               >
                 게시
               </Button>
