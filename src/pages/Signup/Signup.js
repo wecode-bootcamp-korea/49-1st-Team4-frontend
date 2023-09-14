@@ -125,8 +125,7 @@ const Signup = () => {
     );
   };
 
-  const addBrithday =
-    year && month && dates ? new Date(year, month, dates) : '';
+  const addBrithday = year && month && dates ? `${year}-${month}-${dates}` : '';
 
   // TODO: 추후 각 select 요소들 하나의 컴포넌트로 구현할 것 (230912 래영 피드백)
   // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
@@ -141,7 +140,7 @@ const Signup = () => {
   };
 
   const handleSignUp = event => {
-    fetch('http://10.58.52.214:8000/user/signUp', {
+    fetch('http://10.58.52.216:8000/user/signUp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

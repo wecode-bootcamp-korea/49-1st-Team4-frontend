@@ -91,64 +91,6 @@
         .button {
           display: flex;
           justify-content: space-between;
-          width: 100%;
-
-          .cancel {
-            width: 120px;
-            height: 56px;
-            border: 1px solid #2d71f7;
-            border-radius: 6px;
-            font-weight: 800;
-            font-size: 18px;
-            line-height: normal;
-            background: #ffffff;
-            color: #2d71f7;
-            text-align: center;
-
-            &:active {
-              border: 1px solid #083e7f;
-              background: #fff;
-              color: #083e7f;
-            }
-
-            &:hover {
-              border: 1px solid #083e7f;
-              background: #fff;
-              color: #083e7f;
-            }
-
-            &:disabled {
-              border: 1px solid #ccc;
-              background: #fff;
-              color: #999999;
-            }
-          }
-
-          .posting {
-            width: 120px;
-            height: 56px;
-            border: 0;
-            outline: 0;
-            border-radius: 6px;
-            font-weight: 800;
-            font-size: 18px;
-            line-height: normal;
-            background: #2d71f7;
-            color: #fff;
-            text-align: center;
-
-            &:active {
-              background: #083e7f;
-            }
-
-            &:hover {
-              background: #083e7f;
-            }
-
-            &:disabled {
-              background: #cccccc;
-            }
-          }
         }
       }
     }

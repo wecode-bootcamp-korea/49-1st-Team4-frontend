@@ -11,38 +11,44 @@ const ProductEdit = () => {
   };
 
   // content update로 사용할 useState
-  const [content, setContent] = useState({
-    content: '',
-  });
+  const [content, setContent] = useState('');
+  // const [nickname, setNickname] = useState(' ');
+  // const [profileImage, setProfileImage] = useState(' ');
 
   const token = window.localStorage.getItem('login-token');
 
-  // 이전 content 불러오기
-  // useEffect(() => {
-  //   fetch('')
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('이전 content를 불러오는 데 실패했습니다.');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       const previousContent = data.previousContent;
-  //       // 이전 content를 사용하거나 처리하는 로직 추가
-  //       console.log('이전 content:', previousContent);
-  //     })
-  //     .catch(error => {
-  //       console.error('이전 content를 불러오는 동안 오류 발생:', error);
-  //     });
-  // }, []);
+  //이전 content 불러오기
+  useEffect(() => {
+    // const userInfo = window.localStorage.getItem('userInfo');
+    // const { nickname, profileImage } = JSON.parse(userInfo);
+
+    // setNickname(nickname);
+    // setProfileImage(profileImage);
+
+    fetch('url주소', {
+      //백엔드 서버 url 확인하기 -> 글 상세화면 api
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token,
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('이전 content를 불러오는 데 실패했습니다.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setContent(data.content);
+      });
+  }, []);
 
   const handlePostInfo = event => {
-    const { name, value } = event.target;
-
-    setContent({ ...content, [name]: value });
+    setContent(event.target.value);
   };
 
-  const isCheckContent = content.content.length >= 1;
+  const isCheckContent = content.length >= 1;
 
   const handleUpdating = event => {
     if (token) {
@@ -69,7 +75,7 @@ const ProductEdit = () => {
           }
         });
     } else {
-      alert('로그인 후 글 작성이 가능합니다.');
+      alert('로그인 후 글 수정이 가능합니다.');
       navigate('/');
     }
   };
