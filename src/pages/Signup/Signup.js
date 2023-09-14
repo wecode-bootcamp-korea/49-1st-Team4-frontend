@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import './Signup.scss';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import BackButton from '../../components/BackButton/BackButton';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Signup.scss';
 
 const Signup = () => {
-  //필수 정보인 email, password, password, password2를 useState를 통하여 관리
+  //필수 정보인 email, password, checkPassword, nickname useState를 통하여 관리
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
-    password2: '',
+    checkPassword: '',
     nickname: '',
   });
-  const { email, password, password2, nickname } = signUpInfo;
+  const { email, password, checkPassword, nickname } = signUpInfo;
   const handleUserInfo = event => {
     const { name, value } = event.target;
     setSignUpInfo({ ...signUpInfo, [name]: value });
@@ -22,7 +22,7 @@ const Signup = () => {
     email.includes('@') &&
     email.includes('.') &&
     password.length >= 8 &&
-    password === password2 &&
+    password === checkPassword &&
     nickname;
 
   //휴대폰 번호를 관리
@@ -204,7 +204,7 @@ const Signup = () => {
               onChange={handleUserInfo}
             />
             <Input
-              name="password2"
+              name="checkPassword"
               type="password"
               placeholder="비밀번호 확인"
               onChange={handleUserInfo}

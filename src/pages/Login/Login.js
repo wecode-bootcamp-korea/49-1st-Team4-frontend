@@ -47,10 +47,10 @@ const Login = () => {
       .then(result => {
         if (result.message === 'LOGIN_SUCCESS') {
           localStorage.setItem('login-token', result.accessToken);
-          localStorage.setItem('userInfo', {
-            nickname: '김코딩',
-            profileImage: '/images/Pic.jpg',
-          });
+          // localStorage.setItem('userInfo', {
+          //   nickname: '김코딩',
+          //   profileImage: '/images/Pic.jpg',
+          // });
         } else if (result.message === 'EMAIL_DOES_NOT_EXIST') {
           alert('아이디가 일치하지 않습니다.');
         } else if (result.message === 'INCORRECT_PASSWORD') {

@@ -9,26 +9,23 @@ const ProductList = () => {
 
   // 실제 데이터 fetch 함수(GET)
   // useEffect(() => {
-  //   fetch('http://10.58.52.216:8000/thread/check', {
+  //   fetch('http://10.58.52.233:8000/thread/check', {
   //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
   //   })
   //     .then(response => {
   //       console.log(response);
   //       response.json();
   //     })
   //     .then(result => {
-  //       console.log(result.data);
-  //       setContentInfo(result.data);
+  //       console.log(result);
+  //       setContentInfo(result);
   //     });
   // }, []);
 
   // mockdata fetch 함수
   useEffect(() => {
     fetch('/data/mockData.json')
-      .then(Response => Response.json())
+      .then(response => response.json())
       .then(result => setContentInfo(result));
   }, []);
 
@@ -62,13 +59,15 @@ const ProductList = () => {
   // };
 
   const move = (event, key) => {
+    const equalizeKey = key - 1;
     navigate('/productdetail', {
-      state: contentInfo[key - 1],
+      state: contentInfo[equalizeKey],
     });
   };
   const moveEdit = (event, key) => {
-    navigate('/product', {
-      state: contentInfo[key - 1],
+    const equalizeKey = key - 1;
+    navigate('/productedit', {
+      state: contentInfo[equalizeKey],
     });
   };
 
