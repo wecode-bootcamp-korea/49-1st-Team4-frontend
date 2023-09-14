@@ -150,7 +150,7 @@ const Signup = () => {
   };
 
   const handleSignUp = event => {
-    fetch('http://10.58.52.216:8000/user/signUp', {
+    fetch('http://10.58.52.233:8000/user/signUp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
