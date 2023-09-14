@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import './Signup.scss';
+import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import BackButton from '../../components/BackButton/BackButton';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Signup.scss';
 
 const Signup = () => {
-  //필수 정보인 email, password, password, password2를 useState를 통하여 관리
+  //필수 정보인 email, password, checkPassword, nickname useState를 통하여 관리
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
-    password2: '',
+    checkPassword: '',
     nickname: '',
   });
-  const { email, password, password2, nickname } = signUpInfo;
+  const { email, password, checkPassword, nickname } = signUpInfo;
   const handleUserInfo = event => {
     const { name, value } = event.target;
     setSignUpInfo({ ...signUpInfo, [name]: value });
@@ -22,7 +22,7 @@ const Signup = () => {
     email.includes('@') &&
     email.includes('.') &&
     password.length >= 8 &&
-    password === password2 &&
+    password === checkPassword &&
     nickname;
 
   //휴대폰 번호를 관리
@@ -48,7 +48,7 @@ const Signup = () => {
     }
   };
 
-  //이미지 파일 관리
+  //이미지 파일 관리 구현 실패
 
   //생일을 관리
   const [birthday, setBirthday] = useState({
@@ -135,7 +135,6 @@ const Signup = () => {
     year && month && dates
       ? `${year}-${month.padStart(2, '0')}-${dates.padStart(2, '0')}`
       : '';
-  console.log(addBrithday);
 
   // TODO: 추후 각 select 요소들 하나의 컴포넌트로 구현할 것 (230912 래영 피드백)
   // <SelectBox options={} defaultValue={} value={} unit="년도" onChange={} />
@@ -163,18 +162,13 @@ const Signup = () => {
         birthday: addBrithday,
         // profileImage: '',
       }),
-    })
-      .then(response => {
-        if (response.ok) {
-          completeSignUp();
-        }
-        return response.json();
-      })
-      .then(result => {
-        if (result.message === 'DUPLICATE_USER_EMAIL') {
-          alert('중복된 이메일 입니다.');
-        }
-      });
+    }).then(response => {
+      if (response.json().message === 'DUPLICATE_USER_EMAIL') {
+        alert('중복된 이메일 입니다.');
+      } else if (response.ok) {
+        completeSignUp();
+      }
+    });
   };
 
   return (
@@ -205,7 +199,7 @@ const Signup = () => {
               onChange={handleUserInfo}
             />
             <Input
-              name="password2"
+              name="checkPassword"
               type="password"
               placeholder="비밀번호 확인"
               onChange={handleUserInfo}
