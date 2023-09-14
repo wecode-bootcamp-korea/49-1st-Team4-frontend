@@ -110,6 +110,7 @@
         .birthday {
           display: flex;
           gap: 8px;
+          margin-top: 8px;
 
           .year {
             @include fillInput;

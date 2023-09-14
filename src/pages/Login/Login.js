@@ -22,12 +22,13 @@ const Login = () => {
     email.includes('@') && email.includes('.') && password.length >= 8;
 
   const navigate = useNavigate();
+
   const completeLogin = () => {
     navigate('/productlist');
   };
 
   const handleLogin = () => {
-    fetch('http://10.58.52.214:8000/user/signIn', {
+    fetch('http://10.58.52.216:8000/user/signIn', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -37,12 +38,17 @@ const Login = () => {
         password,
       }),
     })
-      .then(response => {
-        if (response.ok) {
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'LOGIN_SUCCESSS') {
+          localStorage.setItem('login-token', result.accessToken);
+          localStorage.setItem('userInfo', {
+            nickname: '김코딩',
+            profileImage: '/images/Pic.jpg',
+          });
           completeLogin();
         }
-      })
-      .then();
+      });
   };
 
   return (
