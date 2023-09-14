@@ -94,7 +94,11 @@ const ProductList = () => {
                     <div className="isMyPost">
                       <span>{info.createdAt}</span>
                       <span className="delete">삭제</span>
-                      <span className="edit" onClick={moveEdit}>
+                      <span
+                        className="edit"
+                        onClick={event => moveEdit(event, info.postId)}
+                        key={info.postId}
+                      >
                         수정
                       </span>
                     </div>
