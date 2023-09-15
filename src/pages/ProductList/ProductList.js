@@ -46,6 +46,10 @@ const ProductList = () => {
       headers: {
         authorization: window.localStorage.getItem('loginToken'),
       },
+    }).then(response => {
+      if (response.ok) {
+        getThread();
+      }
     });
   };
 
@@ -151,13 +155,13 @@ const ProductList = () => {
 
                 <div className="contentFooter">
                   {info.isLiked ? (
-                    <img
-                      // onClick={() => handleLiked(event, info.postId)}
-                      src="/images/post_mu.png"
-                      alt="heart"
-                    />
+                    <img src="/images/post_mu.png" alt="heart" />
                   ) : (
-                    <img src="/images/heart.png" alt="heart" />
+                    <img
+                      src="/images/heart.png"
+                      alt="heart"
+                      onClick={event => handleLiked(event, info.postId)}
+                    />
                   )}
 
                   <div>
