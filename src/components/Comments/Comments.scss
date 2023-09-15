@@ -1,0 +1,21 @@
+@import '../../styles/variable.scss';
+
+.comments {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  border: 1px solid $Black;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .flexBox {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+}

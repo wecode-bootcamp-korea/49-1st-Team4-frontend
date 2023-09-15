@@ -8,8 +8,7 @@ const ProductEdit = () => {
 
   const location = useLocation();
   const info = location.state;
-
-  const isPostId = location.state.postId;
+  // const isPostId = location.state.postId;
 
   const handleCancel = () => {
     navigate('/productlist');

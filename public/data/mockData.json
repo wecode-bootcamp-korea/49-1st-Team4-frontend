@@ -11,7 +11,7 @@
       {
         "commentId": 1,
         "nickname": "lee",
-        "comment": "좋은 말씀이십니다.",
+        "comment": "해리포터 재밌다.",
         "isMyReply": true,
         "createdAt": "2023-08-16T~~~~"
       }
@@ -29,15 +29,15 @@
     "comments": [
       {
         "commentId": 1,
-        "nickname": "lee",
-        "comment": "좋은 말씀이십니다.",
+        "nickname": "에일",
+        "comment": "유튜브 재밌다.",
         "isMyReply": false,
         "createdAt": "2023-08-16T~~~~"
       },
       {
         "commentId": 2,
-        "nickname": "kim",
-        "comment": "좋은 말씀이십니다.",
+        "nickname": "시오",
+        "comment": "굿 잡.",
         "isMyReply": false,
         "createdAt": "2023-08-16T~~~~"
       }
@@ -55,15 +55,15 @@
     "comments": [
       {
         "commentId": 1,
-        "nickname": "lee",
+        "nickname": "지유",
         "comment": "좋은 말씀이십니다.",
         "isMyReply": false,
         "createdAt": "2023-08-16T~~~~"
       },
       {
         "commentId": 2,
-        "nickname": "kim",
-        "comment": "좋은 말씀이십니다.",
+        "nickname": "간즈",
+        "comment": "가나다라마바사.",
         "isMyReply": false,
         "createdAt": "2023-08-16T~~~~"
       }
@@ -82,13 +82,13 @@
       {
         "commentId": 1,
         "nickname": "lee",
-        "comment": "좋은 말씀이십니다.",
+        "comment": "Good job.",
         "isMyReply": false,
         "createdAt": "2023-08-16T~~~~"
       },
       {
         "commentId": 2,
-        "nickname": "kim",
+        "nickname": "타프",
         "comment": "좋은 말씀이십니다.",
         "isMyReply": false,
         "createdAt": "2023-08-16T~~~~"
