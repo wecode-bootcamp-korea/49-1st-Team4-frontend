@@ -9,14 +9,13 @@ const ProductList = () => {
 
   // 실제 데이터 fetch 함수(GET)
   useEffect(() => {
-    fetch('http://10.58.52.233:8000/thread', {
+    fetch('http://10.58.52.52:8000/thread', {
       method: 'GET',
       headers: {
         authorization: window.localStorage.getItem('loginToken'),
       },
     })
       .then(response => {
-        console.log('????', response);
         return response.json();
       })
       .then(result => {
@@ -66,10 +65,6 @@ const ProductList = () => {
     navigate('/productdetail', {
       state: contentInfo.data[equalizeKey],
     });
-    // navigate({
-    //   pathname: '/productdetail',
-    //   postId: '?sort=date&order=newest',
-    // });
   };
 
   const moveEdit = (event, key) => {

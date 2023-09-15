@@ -5,42 +5,57 @@ import Button from '../../../components/Button/Button';
 
 const ProductEdit = () => {
   const navigate = useNavigate();
-
   const location = useLocation();
-  const info = location.state;
-  // const isPostId = location.state.postId;
+  const isPostId = location.state.postId;
 
   const handleCancel = () => {
-    navigate('/productList');
+    navigate('/productlist');
   };
 
   const [content, setContent] = useState('');
+  const [profile, setProfile] = useState('');
+  const [nickname, setNickname] = useState('');
 
   const token = window.localStorage.getItem('loginToken');
 
-  // useEffect(() => {
-  //   if (isPostId !== null) {
-  //     fetch('http://10.58.52.216:8000/thread/?', {
-  //       //백엔드 서버 url 확인하기 -> 글 상세화면 api
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         authorization: token,
-  //         // postId : postId,
-  //       },
-  //     })
-  //       .then(response => {
-  //         if (!response.ok) {
-  //           throw new Error('이전 content를 불러오는 데 실패했습니다.');
-  //         }
-  //         return response.json();
-  //       })
-  //       .then(data => {
-  //         console.log(data);
-  //         // setContent(data.content);
-  //       });
-  //   }
-  // }, []);
+  useEffect(() => {
+    fetch('http://10.58.52.52:8000/user/profile', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: token,
+      },
+    })
+      .then(response => response.json())
+      .then(result => {
+        setProfile(result.data[0].profileImage);
+        setNickname(result.data[0].nickname);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (isPostId !== null) {
+      fetch(`http://10.58.52.52:8000/thread/${isPostId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: token,
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('이전 content를 불러오는 데 실패했습니다.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setContent(data.data[0].content);
+        });
+    } else {
+      alert('이미 삭제된 글입니다.');
+      navigate('/productlist');
+    }
+  }, []);
 
   const handlePostInfo = event => {
     setContent(event.target.value);
@@ -51,8 +66,7 @@ const ProductEdit = () => {
   const handleUpdating = () => {
     if (token) {
       if (isCheckContent) {
-        fetch('url주소', {
-          //백엔드 서버 url 확인하기
+        fetch(`http://10.58.52.52:8000/thread/${isPostId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -64,13 +78,12 @@ const ProductEdit = () => {
         })
           .then(response => response.json())
           .then(result => {
-            console.log(result);
-            // if (result.message === '') {
-            //   alert('등록되었습니다.');
-            //   navigate('/productList');
-            // } else {
-            //   alert('오류가 발생했습니다.');
-            // }
+            if (result.message === 'THREAD_UPDATED') {
+              alert('등록되었습니다.');
+              navigate('/productlist');
+            } else {
+              alert('오류가 발생했습니다.');
+            }
           });
       } else {
         alert('글을 작성해주세요.');
@@ -81,8 +94,6 @@ const ProductEdit = () => {
     }
   };
 
-  const imageUrl = '/images/Pic.jpg';
-
   return (
     <div className="productEdit">
       <div className="productEditBody">
@@ -90,14 +101,15 @@ const ProductEdit = () => {
           <div className="publish">
             <div className="container">
               <div className="profileImg">
-                <img className="image" src={imageUrl} alt="프로필사진" />
+                <img className="image" src={profile} alt="프로필사진" />
               </div>
               <div className="content">
-                <div className="nickname">{info.nickname}</div>
+                <div className="nickname">{nickname}</div>
                 <textarea
                   className="textArea"
                   placeholder="내용 수정하기"
                   onChange={handlePostInfo}
+                  value={content}
                 />
               </div>
             </div>
