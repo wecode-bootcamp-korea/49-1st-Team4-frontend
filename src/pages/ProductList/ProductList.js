@@ -9,20 +9,24 @@ const ProductList = () => {
   const [contentInfo, setContentInfo] = useState([]);
 
   // 실제 데이터 fetch 함수(GET)
+  const getThread = () => {
+    fetch(`${HOST}/thread`, {
+      method: 'GET',
+      headers: {
+        authorization: window.localStorage.getItem('loginToken'),
+      },
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        setContentInfo(result);
+      });
+  };
+
   useEffect(() => {
     if (window.localStorage.getItem('loginToken')) {
-      fetch(`${HOST}/thread`, {
-        method: 'GET',
-        headers: {
-          authorization: window.localStorage.getItem('loginToken'),
-        },
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(result => {
-          setContentInfo(result);
-        });
+      getThread();
     } else {
       fetch(`${HOST}/thread`, {
         method: 'GET',
@@ -36,32 +40,30 @@ const ProductList = () => {
     }
   }, []);
 
-  // 좋아요 관련 fetch 함수
-  // const handleLiked = () => {
-  //   fetch('http://10.58.52.216:8000/thread/check', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //     body: JSON.stringify({}),
-  //   })
-  //     .then()
-  //     .then();
-  // };
+  const handleLiked = (event, postId) => {
+    fetch(`${HOST}/like/${postId}`, {
+      method: 'POST',
+      headers: {
+        authorization: window.localStorage.getItem('loginToken'),
+      },
+    });
+  };
 
   // 삭제 함수
-  // const handleDelete = (event, key) => {
-  //   fetch(`${HOST}/thread/check`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       authorization: window.localStorage.getItem('loginToken'),
-  //     },
-  //     body: JSON.stringify({
-  //       postId: key,
-  //     }),
-  //   });
-  // };
+  const handleDelete = (event, postId) => {
+    fetch(`${HOST}/thread/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: window.localStorage.getItem('loginToken'),
+      },
+    }).then(response => {
+      if (response.ok) {
+        getThread();
+        alert('게시물이 삭제되었습니다.');
+      }
+    });
+  };
 
   // TODO event를 안받는것에 대한 방안 0914 승윤님
   const moveDetail = (event, key) => {
@@ -116,15 +118,15 @@ const ProductList = () => {
                       <span>{info.createdAt.substr(0, 10)}</span>
                       <span
                         className="delete"
-                        // onClick={event => handleDelete(event, index)}
-                        key={index}
+                        onClick={event => handleDelete(event, info.postId)}
                       >
                         삭제
                       </span>
+
                       <span
                         className="edit"
-                        onClick={event => moveEdit(event, index)}
                         key={index}
+                        onClick={event => moveEdit(event, index)}
                       >
                         수정
                       </span>
@@ -144,12 +146,16 @@ const ProductList = () => {
                     {info.content}
                   </p>
                 ) : (
-                  <p key={index}>{info.content}</p>
+                  <p>{info.content}</p>
                 )}
 
                 <div className="contentFooter">
                   {info.isLiked ? (
-                    <img src="/images/post_mu.png" alt="heart" />
+                    <img
+                      // onClick={() => handleLiked(event, info.postId)}
+                      src="/images/post_mu.png"
+                      alt="heart"
+                    />
                   ) : (
                     <img src="/images/heart.png" alt="heart" />
                   )}
