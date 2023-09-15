@@ -1,15 +1,36 @@
 import './ProductDetail.scss';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Comments from '../../components/Comments/Comments';
+import { TOKEN, HOST } from '../../components/Variable/Variable';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const ProductDetail = () => {
   // data 받아오기
   const location = useLocation();
   const info = location.state;
+  const [postContent, setPostContent] = useState([]);
+
+  const getThreadById = (HOST, TOKEN, info) => {
+    fetch(`${HOST}/thread/${info}`, {
+      method: 'GET',
+      headers: {
+        authorization: TOKEN,
+      },
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        setPostContent(result.data);
+      });
+  };
+
+  useEffect(() => {
+    getThreadById(HOST, TOKEN, info);
+  }, []);
 
   // 댓글 관리
   const [comment, setComment] = useState('');
@@ -17,18 +38,26 @@ const ProductDetail = () => {
     setComment(event.target.value);
   };
   const handlePost = () => {
-    fetch('http://10.58.52.233:8000/comment/', {
+    fetch(`${HOST}/comment/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: window.localStorage.getItem('loginToken'),
+        authorization: TOKEN,
       },
       body: JSON.stringify({
-        postId: info.postId,
+        postId: info,
         comment,
       }),
+    }).then(response => {
+      if (response.ok) {
+        getThreadById(HOST, TOKEN, info);
+      }
     });
   };
+
+  if (postContent.length === 0) {
+    return;
+  }
 
   return (
     <div className="productDetail">
@@ -36,8 +65,8 @@ const ProductDetail = () => {
         <BackButton to="/productlist" />
 
         <div>
-          <div>{info.nickname}</div>
-          <div>{info.content}</div>
+          <div>{postContent[0].nickname}</div>
+          <div>{postContent[0].content}</div>
         </div>
 
         <div className="commentBox">
@@ -59,7 +88,7 @@ const ProductDetail = () => {
           </Button>
         </div>
 
-        {info.comments?.map(value => {
+        {postContent[0].comments?.map(value => {
           return <Comments info={value} key={value.commentId} />;
         })}
         <div />

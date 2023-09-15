@@ -1,4 +1,5 @@
 import Button from '../../components/Button/Button';
+import { TOKEN, HOST } from '../../components/Variable/Variable';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProductList.scss';
@@ -9,14 +10,13 @@ const ProductList = () => {
 
   // 실제 데이터 fetch 함수(GET)
   useEffect(() => {
-    fetch('http://10.58.52.233:8000/thread', {
+    fetch(`${HOST}/thread`, {
       method: 'GET',
       headers: {
-        authorization: window.localStorage.getItem('loginToken'),
+        authorization: TOKEN,
       },
     })
       .then(response => {
-        console.log('????', response);
         return response.json();
       })
       .then(result => {
@@ -45,31 +45,25 @@ const ProductList = () => {
   // };
 
   // 삭제 함수
-  // const handleDelete = () => {
-  //   fetch('http://10.58.52.216:8000/thread/check', {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       authorization: 'TOKEN',
-  //     },
-  //     body: JSON.stringify({
-  //       postId: '',
-  //     }),
-  //   })
-  //     .then()
-  //     .then();
-  // };
+  const handleDelete = (event, key) => {
+    fetch(`${HOST}/thread/check`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: TOKEN,
+      },
+      body: JSON.stringify({
+        postId: key,
+      }),
+    });
+  };
 
   // TODO event를 안받는것에 대한 방안 0914 승윤님
   const moveDetail = (event, key) => {
     const equalizeKey = key - 1;
     navigate('/productdetail', {
-      state: contentInfo.data[equalizeKey],
+      state: contentInfo.data[equalizeKey].postId,
     });
-    // navigate({
-    //   pathname: '/productdetail',
-    //   postId: '?sort=date&order=newest',
-    // });
   };
 
   const moveEdit = (event, key) => {
@@ -98,17 +92,32 @@ const ProductList = () => {
               <div className="content" key={info.postId}>
                 <div className="contentHeader">
                   <div className="user">
-                    <img
-                      src="/images/default.PNG"
-                      alt="profileImage"
-                      className="profilePhoto"
-                    />
+                    {info.profileImage ? (
+                      <img
+                        src={info.profileImage}
+                        alt="profileImage"
+                        className="profilePhoto"
+                      />
+                    ) : (
+                      <img
+                        src={info.profileImage}
+                        alt="profileImage"
+                        className="profilePhoto"
+                      />
+                    )}
+
                     {info.nickname}
                   </div>
                   {info.isMyPost ? (
                     <div className="isMyPost">
                       <span>{info.createdAt.substr(0, 10)}</span>
-                      <span className="delete">삭제</span>
+                      <span
+                        className="delete"
+                        onClick={event => handleDelete(event, info.postId)}
+                        key={info.postId}
+                      >
+                        삭제
+                      </span>
                       <span
                         className="edit"
                         onClick={event => moveEdit(event, info.postId)}
