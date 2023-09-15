@@ -1,8 +1,8 @@
 import './ProductDetail.scss';
 import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
 import Comments from '../../components/Comments/Comments';
+import Input from '../../components/Input/Input';
 import { TOKEN, HOST } from '../../components/Variable/Variable';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -14,18 +14,20 @@ const ProductDetail = () => {
   const [postContent, setPostContent] = useState([]);
 
   const getThreadById = (HOST, TOKEN, info) => {
-    fetch(`${HOST}/thread/${info}`, {
-      method: 'GET',
-      headers: {
-        authorization: TOKEN,
-      },
-    })
-      .then(response => {
-        return response.json();
+    if (TOKEN) {
+      fetch(`${HOST}/thread/${info}`, {
+        method: 'GET',
+        headers: {
+          authorization: TOKEN,
+        },
       })
-      .then(result => {
-        setPostContent(result.data);
-      });
+        .then(response => {
+          return response.json();
+        })
+        .then(result => {
+          setPostContent(result.data);
+        });
+    }
   };
 
   useEffect(() => {

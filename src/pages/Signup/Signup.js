@@ -1,6 +1,7 @@
 import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
+import { HOST } from '../../components/Variable/Variable';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.scss';
@@ -59,6 +60,7 @@ const Signup = () => {
   const { year, month, dates } = birthday;
   const thisYear = new Date().getFullYear();
   const lastDateOfMonth = new Date(Number(year), Number(month), 0).getDate();
+  const arrayOfYear = Array;
   const handleBirthday = event => {
     const { name, value } = event.target;
     setBirthday({ ...birthday, [name]: value });
@@ -149,7 +151,7 @@ const Signup = () => {
   };
 
   const handleSignUp = event => {
-    fetch('http://10.58.52.233:8000/user/signUp', {
+    fetch(`${HOST}/user/signUp`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
