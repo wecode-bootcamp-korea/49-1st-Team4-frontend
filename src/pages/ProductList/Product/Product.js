@@ -19,7 +19,7 @@ const Product = () => {
   const token = window.localStorage.getItem('loginToken');
 
   useEffect(() => {
-    fetch('http://10.58.52.233:8000/user/profile', {
+    fetch('http://10.58.52.52:8000/user/profile', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const Product = () => {
   const handlePosting = () => {
     if (token) {
       if (isCheckContent) {
-        fetch('http://10.58.52.233:8000/thread', {
+        fetch('http://10.58.52.52:8000/thread', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

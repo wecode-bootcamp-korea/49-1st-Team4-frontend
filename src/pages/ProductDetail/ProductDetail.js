@@ -17,7 +17,7 @@ const ProductDetail = () => {
     setComment(event.target.value);
   };
   const handlePost = () => {
-    fetch('http://10.58.52.233:8000/comment/', {
+    fetch('http://10.58.52.52:8000/comment/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
