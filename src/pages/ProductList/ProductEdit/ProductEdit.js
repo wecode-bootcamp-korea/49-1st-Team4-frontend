@@ -12,7 +12,7 @@ const ProductEdit = () => {
   const isPostId = location.state.postId;
 
   const handleCancel = () => {
-    navigate('/productList');
+    navigate('/productlist');
   };
 
   const [content, setContent] = useState('');
@@ -27,7 +27,7 @@ const ProductEdit = () => {
   //       headers: {
   //         'Content-Type': 'application/json',
   //         authorization: token,
-  //         // postId : postId,
+  //         // postId : isPostId,
   //       },
   //     })
   //       .then(response => {
@@ -68,7 +68,7 @@ const ProductEdit = () => {
             console.log(result);
             // if (result.message === '') {
             //   alert('등록되었습니다.');
-            //   navigate('/productList');
+            //   navigate('/productlist');
             // } else {
             //   alert('오류가 발생했습니다.');
             // }

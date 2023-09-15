@@ -7,7 +7,7 @@ const Product = () => {
   const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate('/productList');
+    navigate('/productlist');
   };
 
   const [content, setContent] = useState('');
