@@ -1,5 +1,5 @@
 import Button from '../../components/Button/Button';
-import { TOKEN, HOST } from '../../components/Variable/Variable';
+import { HOST } from '../../components/Variable/Variable';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProductList.scss';
@@ -10,26 +10,31 @@ const ProductList = () => {
 
   // 실제 데이터 fetch 함수(GET)
   useEffect(() => {
-    fetch(`${HOST}/thread`, {
-      method: 'GET',
-      headers: {
-        authorization: TOKEN,
-      },
-    })
-      .then(response => {
-        return response.json();
+    if (window.localStorage.getItem('loginToken')) {
+      fetch(`${HOST}/thread`, {
+        method: 'GET',
+        headers: {
+          authorization: window.localStorage.getItem('loginToken'),
+        },
       })
-      .then(result => {
-        setContentInfo(result);
-      });
+        .then(response => {
+          return response.json();
+        })
+        .then(result => {
+          setContentInfo(result);
+        });
+    } else {
+      fetch(`${HOST}/thread`, {
+        method: 'GET',
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(result => {
+          setContentInfo(result);
+        });
+    }
   }, []);
-
-  // mockdata fetch 함수
-  // useEffect(() => {
-  //   fetch('/data/mockData.json')
-  //     .then(response => response.json())
-  //     .then(result => setContentInfo(result));
-  // }, []);
 
   // 좋아요 관련 fetch 함수
   // const handleLiked = () => {
@@ -45,31 +50,29 @@ const ProductList = () => {
   // };
 
   // 삭제 함수
-  const handleDelete = (event, key) => {
-    fetch(`${HOST}/thread/check`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: TOKEN,
-      },
-      body: JSON.stringify({
-        postId: key,
-      }),
-    });
-  };
+  // const handleDelete = (event, key) => {
+  //   fetch(`${HOST}/thread/check`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       authorization: window.localStorage.getItem('loginToken'),
+  //     },
+  //     body: JSON.stringify({
+  //       postId: key,
+  //     }),
+  //   });
+  // };
 
   // TODO event를 안받는것에 대한 방안 0914 승윤님
   const moveDetail = (event, key) => {
-    const equalizeKey = key - 1;
     navigate('/productdetail', {
-      state: contentInfo.data[equalizeKey].postId,
+      state: contentInfo.data[key].postId,
     });
   };
 
   const moveEdit = (event, key) => {
-    const equalizeKey = key - 1;
     navigate('/productedit', {
-      state: contentInfo.data[equalizeKey],
+      state: contentInfo.data[key],
     });
   };
 
@@ -87,9 +90,9 @@ const ProductList = () => {
       <div className="container">
         {/* TODO map으로 반복되는 것 컴포넌트화 하기 0913 지수님 피드백 */}
         <div className="main">
-          {contentInfo.data.map(info => {
+          {contentInfo.data.map((info, index) => {
             return (
-              <div className="content" key={info.postId}>
+              <div className="content" key={index}>
                 <div className="contentHeader">
                   <div className="user">
                     {info.profileImage ? (
@@ -113,15 +116,15 @@ const ProductList = () => {
                       <span>{info.createdAt.substr(0, 10)}</span>
                       <span
                         className="delete"
-                        onClick={event => handleDelete(event, info.postId)}
-                        key={info.postId}
+                        // onClick={event => handleDelete(event, index)}
+                        key={index}
                       >
                         삭제
                       </span>
                       <span
                         className="edit"
-                        onClick={event => moveEdit(event, info.postId)}
-                        key={info.postId}
+                        onClick={event => moveEdit(event, index)}
+                        key={index}
                       >
                         수정
                       </span>
@@ -132,12 +135,18 @@ const ProductList = () => {
                     </div>
                   )}
                 </div>
-                <p
-                  onClick={event => moveDetail(event, info.postId)}
-                  key={info.postId}
-                >
-                  {info.content}
-                </p>
+                {window.localStorage.getItem('loginToken') ? (
+                  <p
+                    className="contents"
+                    onClick={event => moveDetail(event, index)}
+                    key={index}
+                  >
+                    {info.content}
+                  </p>
+                ) : (
+                  <p key={index}>{info.content}</p>
+                )}
+
                 <div className="contentFooter">
                   {info.isLiked ? (
                     <img src="/images/post_mu.png" alt="heart" />
@@ -147,11 +156,13 @@ const ProductList = () => {
 
                   <div>
                     <span>좋아요</span>
-                    <span>{info.likeCount}</span>
+                    <span>{info?.likeCount}</span>
                   </div>
                   <div>
                     <span>댓글</span>
-                    <span>{info.comments?.length}</span>
+                    <span>
+                      {info.comments?.length ? info.comments.length : 0}
+                    </span>
                   </div>
                 </div>
                 <hr />
@@ -172,4 +183,5 @@ const ProductList = () => {
     </div>
   );
 };
+
 export default ProductList;

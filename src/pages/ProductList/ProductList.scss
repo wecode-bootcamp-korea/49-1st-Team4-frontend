@@ -45,6 +45,9 @@
             gap: 10px;
           }
         }
+        .delete {
+          color: $Red;
+        }
 
         .edit,
         .delete {
@@ -56,7 +59,9 @@
         p {
           margin-top: 10px;
           line-height: 140%;
+        }
 
+        .contents {
           &:hover {
             cursor: pointer;
           }

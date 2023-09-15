@@ -1,8 +1,9 @@
+import Button from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
+import { HOST } from '../../components/Variable/Variable';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Input from '../../components/Input/Input';
 import './Login.scss';
-import Button from '../../components/Button/Button';
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
@@ -28,7 +29,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    fetch('http://10.58.52.52:8000/user/signIn', {
+    fetch(`${HOST}/user/signIn`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
