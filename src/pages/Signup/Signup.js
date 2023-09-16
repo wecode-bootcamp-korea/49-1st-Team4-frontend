@@ -37,18 +37,14 @@ const Signup = () => {
     setPhoneNumber({ ...phoneNumber, [name]: value });
   };
   const handleLastPhoneNumber = event => {
+    if (event.target.value.length > event.target.maxLength) {
+      event.target.value = event.target.value.slice(0, event.target.maxLength);
+    }
     const { name, value } = event.target;
     setPhoneNumber({ ...phoneNumber, [name]: value });
   };
   const addPhoneNumber =
     lastPhoneNumber.length === 8 ? firstPhoneNumber + lastPhoneNumber : '';
-
-  const onInput = e => {
-    if (e.target.value.length > e.target.maxLength) {
-      e.target.value = e.target.value.slice(0, e.target.maxLength);
-    }
-  };
-
   //이미지 파일 관리 구현 실패
 
   //생일을 관리
@@ -150,7 +146,7 @@ const Signup = () => {
     navigate('/signup-complete');
   };
 
-  const handleSignUp = event => {
+  const handleSignUp = () => {
     fetch(`${HOST}/user/signUp`, {
       method: 'POST',
       headers: {
@@ -162,7 +158,6 @@ const Signup = () => {
         nickname,
         phoneNumber: addPhoneNumber,
         birthday: addBrithday,
-        // profileImage: '',
       }),
     }).then(response => {
       if (response.json().message === 'DUPLICATE_USER_EMAIL') {
@@ -242,7 +237,6 @@ const Signup = () => {
                 type="number"
                 placeholder="휴대폰 번호를 입력해 주세요"
                 onChange={handleLastPhoneNumber}
-                onInput={onInput}
                 maxLength="8"
               />
             </div>
