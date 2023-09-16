@@ -1,4 +1,3 @@
-import './ProductDetail.scss';
 import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
 import Comments from '../../components/Comments/Comments';
@@ -6,9 +5,9 @@ import Input from '../../components/Input/Input';
 import { TOKEN, HOST } from '../../components/Variable/Variable';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import './ProductDetail.scss';
 
 const ProductDetail = () => {
-  // data 받아오기
   const location = useLocation();
   const info = location.state;
   const [postContent, setPostContent] = useState([]);
@@ -34,7 +33,6 @@ const ProductDetail = () => {
     getThreadById(HOST, TOKEN, info);
   }, []);
 
-  // 댓글 관리
   const [comment, setComment] = useState('');
   const handleComment = event => {
     setComment(event.target.value);
